@@ -15,6 +15,7 @@ cd $new_dirname
 eval $(ssh-agent) > /dev/null
 ssh-add /home/npmap/.ssh/npmap-bot/id_rsa
 
+# Put these all after a "&&" to make sure they only run if there is no error
 git add "$new_basename" && git commit -m "$commit_msg" && git pull --ff-only && git push
 
 cd `pwd`
