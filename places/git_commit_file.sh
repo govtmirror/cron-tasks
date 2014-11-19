@@ -2,6 +2,7 @@ script_dir=`pwd`
 
 new_filename="$1"
 commit_msg="$2"
+
 new_dirname=`dirname "$new_filename"`
 new_basename=`basename "$new_filename"`
 
