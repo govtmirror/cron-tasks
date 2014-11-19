@@ -10,6 +10,11 @@ if [ -z "$commit_msg" ]; then
 fi
 
 cd $new_dirname
+
+#assign an ssh key
+eval $(ssh-agent) > /dev/null
+ssh-add /home/npmap/.ssh/npmap-bot/id_rsa
+
 git add "$new_basename" && git commit -m "$commit_msg" && git pull --ff-only && git push
 
 cd `pwd`
