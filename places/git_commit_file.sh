@@ -17,6 +17,7 @@ eval $(ssh-agent) > /dev/null
 ssh-add /home/npmap/.ssh/npmap-bot/id_rsa
 
 # Put these all after a "&&" to make sure they only run if there is no error
+# If you want to avoid doing a merge somewhere, do a "git reset --hard origin" before adding your new/updated files
 cd $new_dirname
 git add "$new_basename" && git commit -m "$commit_msg" && git pull --ff-only && git push
 
