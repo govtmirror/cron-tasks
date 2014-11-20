@@ -19,6 +19,7 @@ var params = {
 var appendLog = function(entry, callback) {
   var filename = __dirname + '/logs/' + entry.job.name + '/log.json'; //TODO: better file name!
   mkdirp(__dirname + '/logs/' + entry.job.name, function() {
+    console.log('/bin/echo ' + JSON.stringify(entry) + ' >> "' + filename + '"');
     exec('/bin/echo ' + JSON.stringify(entry) + ' >> "' + filename + '"', callback);
   });
 };
