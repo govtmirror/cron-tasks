@@ -42,6 +42,7 @@ var addTasks = function(task) {
     job = new CronJob({
       cronTime: task.interval,
       onTick: function(onComplete) {
+        console.log('Running task:', task.name);
         if (taskTree[task.task.type]) {
           taskTree[task.task.type](task.task.path, taskReporter(task, process.hrtime(), onComplete));
         } else {
