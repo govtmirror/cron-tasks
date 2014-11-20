@@ -1,0 +1,26 @@
+{
+  "name": "cron-tasks",
+  "version": "0.0.1",
+  "description": "Runs our cron tasks",
+  "keywords": [
+    "cron"
+  ],
+  "author": "Jim McAndrew <james_mcandrew@partner.nps.gov>",
+  "license": "Public Domain",
+  "contributors": [{
+    "name": "Jim McAndrew",
+    "email": "james_mcandrew@partner.nps.gov"
+  }, {
+    "name": "Nate Irwin",
+    "email": "nate_irwin@nps.gov"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nationalparkservice/cron-tasks"
+  },
+  "dependencies": {
+    "cron": "1.0.5",
+    "handlebars": "2.0.0",
+    "mkdirp": "0.5.0"
+  }
+}
