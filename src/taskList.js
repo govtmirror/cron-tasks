@@ -6,12 +6,20 @@ module.exports = function(params) {
   };
 
   return [{
-    'enabled': true,
+    'enabled': false,
     'interval': '* * * * * *',
     'name': 'Test DB task',
     'task': {
       'type': 'script',
       'path': handlebars('/bin/bash {{tasksDir}}/test/db_test.sh'),
+    }
+  }, {
+    'enabled': true,
+    'interval': '0 */5 * * * *',
+    'name': 'Places_SQL_Dump',
+    'task': {
+      'type': 'script',
+      'path': handlebars('/bin/bash {{tasksDir}}/places/sql_dump.sh'),
     }
   }];
 };
