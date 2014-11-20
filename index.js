@@ -50,6 +50,7 @@ var addTasks = function(task) {
         }
       },
       onComplete: function(report) {
+        console.log('Task complete:', task.name, 'after:', report.elapsedTime, 'seconds');
         var log = {
           'job': {
             name: task.name,
