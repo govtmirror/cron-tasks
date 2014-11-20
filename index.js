@@ -42,9 +42,10 @@ var addTasks = function(task) {
     job = new CronJob({
       cronTime: task.interval,
       onTick: function(onComplete) {
+        var startTime = process.hrtime();
         console.log('Running task:', task.name);
         if (taskTree[task.task.type]) {
-          taskTree[task.task.type](task.task.path, taskReporter(task, process.hrtime(), onComplete));
+          taskTree[task.task.type](task.task.path, taskReporter(task, startTime, onComplete));
         } else {
           console.log('Invalid Type');
         }
