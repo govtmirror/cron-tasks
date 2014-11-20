@@ -40,7 +40,7 @@ module.exports = function(params) {
   }, {
     'enabled': true,
     'interval': '0 45 */12 * * *', // Every 12 hours on the 45
-    'name': 'Places_Mobile_Data_Only',
+    'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
       'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh true'),
