@@ -27,7 +27,7 @@ var appendLog = function(entry, callback) {
 var taskReporter = function(task, startTime, callback) {
   return function(error, stdout, stderr) {
     var report = {
-      'elapsedTime': process.hrtime(startTime)[1] / 1000000000,
+      'elapsedTime': process.hrtime(startTime)[0] + (process.hrtime(startTime)[1] / 1000000000),
       'error': error,
       'stdout': stdout,
       'stderr': stderr
