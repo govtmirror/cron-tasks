@@ -21,4 +21,4 @@ ssh-add /home/npmap/.ssh/npmap-bot/id_rsa
 cd $new_dirname
 git add "$new_basename" && git commit -m "$commit_msg" && git pull --ff-only && git push
 
-cd `pwd`
+cd $script_dir
