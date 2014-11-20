@@ -1,7 +1,7 @@
 #!/bin/bash
 rootdir=`pwd`
 todays_date=`date "+%Y%m%d"`
-cd "/home/npmap/dev/cron-tasks/places"
+cd "/home/npmap/dev/cron-tasks/tasks/places"
 format="geojson"
 output="/home/npmap/dev/data/places/points_of_interest.geojson"
 output_temp="/home/npmap/dev/data/places/points_of_interest_"$todays_date".geojson"
@@ -13,5 +13,5 @@ cd `dirname $output`
 git reset --hard origin
 cd $rootdir
 
-#/bin/bash $rootdir/export.sh -f "$format" -o "$output_temp" -s "$sqlFile" && rm $output && mv $output_temp $output && /bin/bash $rootdir/git_commit_file.sh "$output" "$commitMessage"
+/bin/bash ./export.sh -f "$format" -o "$output_temp" -s "$sqlFile" && rm $output && mv $output_temp $output && /bin/bash ./git_commit_file.sh "$output" "$commitMessage"
 cd $rootdir
