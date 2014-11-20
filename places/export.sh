@@ -55,5 +55,10 @@ pg_connection="host=$pg_host dbname=$pg_dbname user=$pg_user"
 pg_sql=`cat $sql_file | perl -pe 's/\n/ /g' | perl -pe 's/\s{1,}/ /g'`
 ogr_options="-overwrite -nlt POINT -s_srs EPSG:4326 -t_srs EPSG:4326"
 
+# Do a git fetch for the repo where we're writing
+cd dirname $output
+git reset --hard origin
+cd $thisdir
+
 $ogrexec -f "$format" "$output" PG:"$pg_connection" -sql "$pg_sql" $ogr_options
 
