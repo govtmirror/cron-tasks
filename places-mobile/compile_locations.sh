@@ -10,4 +10,4 @@ bash $site_generation_script
 # Commit the changes to github
 bash $git_commit_script
 
-cd pwd
+cd $script_dir 
