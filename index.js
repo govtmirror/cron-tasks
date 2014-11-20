@@ -74,5 +74,11 @@ var addTasks = function(task) {
 var tasks = taskList(params);
 for (var i in tasks) {
   tasks[i].job = addTasks(tasks[i]);
-  if (tasks[i].enabled) tasks[i].job.start();
+  if (tasks[i].enabled) {
+    if (tasks[i].job) {
+      tasks[i].job.start();
+    } else {
+      console.log('invalid job', tasks[i].name);
+    }
+  }
 }
