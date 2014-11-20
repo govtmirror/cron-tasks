@@ -63,7 +63,9 @@ var addTasks = function(task) {
           'startTime': new Date(new Date() - report.elapsedTime).toUTCString(),
           'endTime': new Date().toUTCString()
         };
-        appendLog(log);
+        appendLog(log, function(e, so, se) {
+          console.log(e, so, se);
+        });
       },
       start: false,
       timeZome: 'America/Denver'
