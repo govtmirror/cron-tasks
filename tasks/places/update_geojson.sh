@@ -9,7 +9,7 @@ commitMessage="Updating the points_of_interest.geojson for $todays_date"
 
 # Do a git fetch for the repo where we're writing
 cd `dirname $output`
-git reset --hard origin
+git reset --hard origin && git pull
 cd "/home/npmap/dev/cron-tasks/tasks/places"
 
 /bin/bash ./export.sh -f "$format" -o "$output_temp" -s "$sqlFile" && rm $output && mv $output_temp $output && /bin/bash ./git_commit_file.sh "$output" "$commitMessage"
