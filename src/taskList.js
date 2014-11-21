@@ -14,7 +14,7 @@ module.exports = function(params) {
       'path': handlebars('/bin/bash {{tasksDir}}/test/db_test.sh'),
     }
   }, {
-    'enabled': false,
+    'enabled': true,
     'interval': '0 30 1 * * *', // 1:30 am
     'name': 'Places_SQL_Dump',
     'task': {
@@ -22,7 +22,7 @@ module.exports = function(params) {
       'path': handlebars('/bin/bash {{tasksDir}}/places/sql_dump.sh'),
     }
   }, {
-    'enabled': false,
+    'enabled': true,
     'interval': '0 15 * * * *', // On the 15 of every hour
     'name': 'Places_POI_update',
     'task': {
@@ -38,8 +38,8 @@ module.exports = function(params) {
       'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh'),
     }
   }, {
-    'enabled': false,
-    'interval': '0 45 */12 * * *', // Every 12 hours on the 45
+    'enabled': true,
+    'interval': '0 45 */6 * * *', // Every 6 hours on the 45
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
