@@ -1,5 +1,5 @@
 var CronJob = require('cron').CronJob;
-var taskList = require('./src/taskList');
+var taskList = require('./taskList');
 var mkdirp = require('mkdirp');
 
 var exec = require('child_process').exec;
