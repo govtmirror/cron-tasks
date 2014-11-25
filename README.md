@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="http://www.nps.gov/npmap/img/nps-arrowhead-medium.png" alt="NPS Arrowhead">
-</p>
-
 # cron-tasks
 This is a task manager based off of the [cron](https://github.com/ncb000gt/node-cron) project.
 
