@@ -8,3 +8,6 @@ SELECT
   tags -> 'name' as name
 FROM
   nodes
+WHERE
+ array_length(akeys(tags),1) > 1 OR  
+ NOT exist(tags, 'nps:places_uuid')
