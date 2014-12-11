@@ -78,13 +78,17 @@ var addTasks = function(task) {
 };
 
 var tasks = taskList(params);
+var taskReport = '' + new Date() + '\n--------------------------------------------\n';
 for (var i in tasks) {
   tasks[i].job = addTasks(tasks[i]);
   if (tasks[i].enabled) {
     if (tasks[i].job) {
+      console.log('starting job', tasks[i].name, tasks[i].interval);
+      taskReport += 'Starting job: ' + tasks[i].name + ' (' + tasks[i].interval + ')\n';
       tasks[i].job.start();
     } else {
       console.log('invalid job', tasks[i].name);
     }
   }
 }
+exec('/bin/echo "' + taskReport + '" >> "' + __dirname + '/logs/service.log' + '"', function(){return null;});
