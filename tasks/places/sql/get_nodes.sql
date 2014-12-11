@@ -11,3 +11,5 @@ FROM
 WHERE
  array_length(akeys(tags),1) > 1 OR  
  NOT exist(tags, 'nps:places_uuid')
+ORDER BY
+ id
