@@ -39,7 +39,7 @@ module.exports = function(params) {
     }
   }, {
     'enabled': true,
-    'interval': '0 45 */6 * * *', // Every 6 hours on the 45
+    'interval': '0 45 */3 * * *', // Every 3 hours on the 45
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
