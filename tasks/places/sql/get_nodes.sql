@@ -9,7 +9,6 @@ SELECT
 FROM
   nodes
 WHERE
- array_length(akeys(tags),1) > 1 OR  
- NOT exist(tags, 'nps:places_uuid')
+ array_length(array_remove(array_remove(akeys(tags),'nps:places_id'), 'nps:unit_code'),1) > 0
 ORDER BY
- id
+  id
