@@ -45,5 +45,13 @@ module.exports = function(params) {
       'type': 'script',
       'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh true'),
     }
+  }, {
+    'enabled': true,
+    'interval': '0 */5 * * * *', // One the 5 of every hour
+    'name': 'CartoDB_Render',
+    'task': {
+      'type': 'script',
+      'path': handlebars('/bin/bash {{tasksDir}}/cartodb/render.sh'),
+    }
   }];
 };
