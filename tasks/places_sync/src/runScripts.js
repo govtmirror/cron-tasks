@@ -1,9 +1,9 @@
-var Bluebird = require('bluebird');
-var config = require('../config');
-var database = require('datawrap')(config.database.poi_pgs, config.database.defaults);
-var fandlebars = require('fandlebars');
-var request = Bluebird.promisify(require('request'));
-var fs = require('fs');
+var Bluebird = require('bluebird'),
+  config = require('../config'),
+  database = require('datawrap')(config.database.poi_pgs, config.database.defaults),
+  fandlebars = require('fandlebars'),
+  fs = require('fs'),
+  request = Bluebird.promisify(require('request'));
 
 module.exports = {
   database: function(file, params) {
@@ -43,8 +43,8 @@ module.exports = {
 
       var runQuery = function(query) {
         return new Bluebird(function(queryResolve, queryReject) {
-          var cleanedSql = fandlebars(query, params).replace(/\'null\'/g, 'null');
-          var requestPath = 'https://' + config.cartodb.account + '.cartodb.com/api/v2/sql?q=';
+          var cleanedSql = fandlebars(query, params).replace(/\'null\'/g, 'null'),
+            requestPath = 'https://' + config.cartodb.account + '.cartodb.com/api/v2/sql?q=';
           requestPath += encodeURIComponent(cleanedSql);
           requestPath += '&api_key=' + config.cartodb.apiKey;
           request(requestPath).then(function(r) {
