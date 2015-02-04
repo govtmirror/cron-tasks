@@ -1,9 +1,9 @@
-var Bluebird = require('bluebird');
-var cartoDbScripts = require('../cartoDbScripts');
-var config = require('../config');
-var runScript = require('./runScripts');
-var sqlFiles = require('../sqlScripts');
-var fs = require('fs');
+var Bluebird = require('bluebird'),
+  cartoDbScripts = require('../cartoDbScripts'),
+  config = require('../config'),
+  fs = require('fs'),
+  runScript = require('./runScripts'),
+  sqlFiles = require('../sqlScripts');
 
 module.exports = function(type) {
   var params = {
@@ -13,22 +13,24 @@ module.exports = function(type) {
   return new Bluebird(function(resolve, reject) {
     runScript.database(sqlFiles.writeStartTime, params).then(function() {
       runScript.database(sqlFiles[type].getChanges, params).then(function(result) {
+        var resultIds;
         if (result && result[0] && result[0].result && result[0].result.rows && result[0].result.rows[0] && result[0].result.rows[0].ids) {
+          resultIds = result[0].result.rows[0].ids;
           console.log('Updating ' + type + '!');
-          console.log('New ID', result[0].result.rows[0].ids);
-          params.changes = '{' + result[0].result.rows[0].ids.join(',') + '}';
-          params.cartoDbChanges = 'ARRAY[' + result[0].result.rows[0].ids.join(',') + ']';
+          console.log('New ID', resultIds);
+          params.changes = '{' + resultIds.join(',') + '}';
+          params.cartoDbChanges = 'ARRAY[' + resultIds.join(',') + ']';
           runScript.database(sqlFiles[type].getNewData, params).then(function(listOfUpdates) {
+            var cartoDbDeletes = [],
+              i,
+              numberOfDeletes = 25,
+              paramParts = [];
             params.newData = listOfUpdates[0].result.rows;
-
             // CartoDB doesn't like a long delete list, so we split up the list
-            var numberOfDeletes = 25;
-            var cartoDbDeletes = [];
-            var paramParts = [];
-            for (var i = 0; i < result[0].result.rows[0].ids.length; i += numberOfDeletes) {
+            for (i = 0; i < resultIds.length; i += numberOfDeletes) {
               console.log('Change #', i, '-', i + numberOfDeletes);
               paramParts[i] = {
-                'cartoDbChanges': 'ARRAY[' + result[0].result.rows[0].ids.slice(i, i + (numberOfDeletes - 1)) + ']'
+                'cartoDbChanges': 'ARRAY[' + resultIds.slice(i, i + (numberOfDeletes - 1)) + ']'
               };
               cartoDbDeletes[i] = runScript.server(cartoDbScripts[type].remove, paramParts[i]);
             }
@@ -41,12 +43,11 @@ module.exports = function(type) {
               });
               Bluebird.all(insertList).then(function() {
                 // Post Sync Transactions
-                // TODO: Clean this up!
-                var viewParams = {
-                  'singleTransaction': true
-                };
-                var viewList = [];
-                var postSyncTasks = fs.readdirSync(__dirname + '/../sql/views').indexOf(type) > -1;
+                var postSyncTasks = fs.readdirSync(__dirname + '/../sql/views').indexOf(type) > -1,
+                  viewList = [],
+                  viewParams = {
+                    'singleTransaction': true
+                  };
                 if (postSyncTasks) {
                   fs.readdirSync(__dirname + '/../sql/views/' + type).map(function(fileName) {
                     viewList.push(runScript.server('file:///views/' + type + '/' + fileName, viewParams));
