@@ -43,7 +43,7 @@ module.exports = function(type) {
                 // Post Sync Transactions
                 // TODO: Clean this up!
                 var viewParams = {
-                  'singleTransation': true
+                  'singleTransaction': true
                 };
                 var viewList = [];
                 var postSyncTasks = fs.readdirSync(__dirname + '/../sql/views').indexOf(type) > -1;
