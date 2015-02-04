@@ -26,13 +26,13 @@ module.exports = {
       }
       sql.map(function(query) {
         var queryText;
-        console.log(query);
+        console.log('Running CartoDB Query:', query);
         if (query.substr(0, 7) === 'file://') {
-          queryText = fs.readFileSync(__dirname + '/../sql' + query.substr(7), 'utf8').split(';');
+          queryText = fs.readFileSync(__dirname + '/../sql' + query.substr(7), 'utf8');
           if (params.singleTransaction) {
             queries.push(queryText);
           } else {
-            queryText.map(function(q) {
+            queryText.split(';').map(function(q) {
               queries.push(q + ';');
             });
           }
@@ -40,8 +40,6 @@ module.exports = {
           queries.push(query);
         }
       });
-
-      console.log('queries', queries, sql);
 
       var runQuery = function(query) {
         return new Bluebird(function(queryResolve, queryReject) {
