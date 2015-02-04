@@ -1,0 +1,24 @@
+{
+  "cartodb": {
+    "account": "CartoDB Account Name",
+    "apiKey": "See here: http://docs.cartodb.com/cartodb-platform/sql-api.html#api-key"
+  },
+  "database": {
+    "defaults": {
+      "rootDirectory": "{{env.PWD}}/sql",
+      "delimiter": ";",
+      "fileDesignator": "file:///",
+      "fileOptions": {
+        "encoding": "utf8"
+      }
+    },
+    "poi_pgs": {
+      "address": "ADDRESS",
+      "dbname": "NAME",
+      "password": "PASSWORD",
+      "type": "postgresql",
+      "username": "USERNAME"
+    }
+  },
+  "taskName": "automated_task"
+}
