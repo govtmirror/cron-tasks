@@ -46,7 +46,7 @@ module.exports = function(params) {
       'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh true'),
     }
   }, {
-    'enabled': true,
+    'enabled': false,
     'interval': '0 */5 * * * *', // One the 5 of every hour
     'name': 'CartoDB_Render',
     'task': {
