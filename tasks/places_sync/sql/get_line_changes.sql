@@ -6,7 +6,7 @@ FROM
   SELECT
     "osm_id"
   FROM
-    "nps_render_polygon",
+    "nps_render_line",
    (SELECT
       COALESCE(
         (SELECT "run_time"
@@ -28,8 +28,8 @@ FROM
       '2010-01-01'::timestamp without time zone
     ) as "start_time") "render_time"
   WHERE
-    "nps_render_polygon"."rendered" >= "render_time"."start_time" AND
-    "nps_render_polygon"."rendered" <= "render_time"."end_time"
+    "nps_render_line"."rendered" >= "render_time"."start_time" AND
+    "nps_render_line"."rendered" <= "render_time"."end_time"
   UNION
   SELECT 
     "osm_id"
