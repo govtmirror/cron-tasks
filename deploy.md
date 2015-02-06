@@ -12,16 +12,16 @@ sudo npm install -g forever
 sudo npm install -g forever-service
 git clone https://github.com/nationalparkservice/cron-tasks.git
 cd ./cron-tasks
-sudo forever-service install cron-tasks --script index.js
+sudo forever-service install crontasks --script index.js
 ```
 
 ### Using Forever, restarting the service
 ```
 Commands to interact with service places-website
-Start   - "sudo start cron-tasks"
-Stop    - "sudo stop cron-tasks"
-Status  - "sudo status cron-tasks"
-Restart - "sudo restart cron-tasks"
+Start   - "sudo start crontasks"
+Stop    - "sudo stop crontasks"
+Status  - "sudo status crontasks"
+Restart - "sudo restart crontasks"
 ```
 
 #### Note:
@@ -29,4 +29,4 @@ Restart - "sudo restart cron-tasks"
 
 To get around this run the command:
 
-```sudo stop cron-tasks && sudo start cron-tasks```
+```sudo stop crontasks && sudo start crontasks```
