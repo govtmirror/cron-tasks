@@ -8,11 +8,11 @@ run('point').then(function(pointMsg) {
       console.log(lineMsg);
       process.exit();
     }).catch(function(e) {
-      throw new Error(e);
+      throw e;
     });
   }).catch(function(e) {
-    throw new Error(e);
+    throw (e);
   });
 }).catch(function(e) {
-  throw new Error(e);
+  throw (e);
 });
