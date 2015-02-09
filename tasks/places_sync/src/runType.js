@@ -44,18 +44,27 @@ module.exports = function(type) {
               Bluebird.all(insertList).then(function() {
                 // Post Sync Transactions
                 var postSyncTasks = fs.readdirSync(__dirname + '/../sql/views').indexOf(type) > -1,
+                  truncateList = [],
                   viewList = [],
                   viewParams = {
-                    'singleTransaction': true
+                    'transactionIndex': 0
                   };
                 if (postSyncTasks) {
                   fs.readdirSync(__dirname + '/../sql/views/' + type).map(function(fileName) {
-                    viewList.push(runScript.server('file:///views/' + type + '/' + fileName, viewParams));
+                    truncateList.push(runScript.server('file:///views/' + type + '/' + fileName, viewParams));
+                    viewList.push(runScript.server('file:///views/' + type + '/' + fileName, {
+                      'transactionIndex': 1
+                    }));
                   });
                 }
                 if (viewList.length > 0) {
-                  Bluebird.all(viewList).then(function() {
-                    resolve('Done with ' + type + 's and its ' + viewList.length + ' materialized view' + (viewList.length > 1 ? 's!' : '!'));
+                  Bluebird.all(truncateList).then(function() {
+                    console.log('Truncate Finished');
+                    Bluebird.all(viewList).then(function() {
+                      resolve('Done with ' + type + 's and its ' + viewList.length + ' materialized view' + (viewList.length > 1 ? 's!' : '!'));
+                    }).catch(function(e) {
+                      reject(new Error(e));
+                    });
                   }).catch(function(e) {
                     reject(new Error(e));
                   });

@@ -36,6 +36,9 @@ module.exports = {
               queries.push(q + ';');
             });
           }
+          if (params.transactionIndex) {
+            queries = [queries[params.transactionIndex]];
+          }
         } else {
           queries.push(query);
         }
