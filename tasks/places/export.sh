@@ -48,9 +48,9 @@ if [ ! -f $sql_file ]; then
 fi
 
 ogrexec=`which ogr2ogr`
-pg_host=inpniscvplaces1
-pg_dbname=poi_pgs
-pg_user=osm
+pg_host=10.147.153.193
+pg_dbname=places_pgs
+pg_user=postgres
 pg_connection="host=$pg_host dbname=$pg_dbname user=$pg_user"
 pg_sql=`cat $sql_file | perl -pe 's/\n/ /g' | perl -pe 's/\s{1,}/ /g'`
 ogr_options="-overwrite -nlt POINT -s_srs EPSG:4326 -t_srs EPSG:4326"
