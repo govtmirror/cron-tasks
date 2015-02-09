@@ -37,7 +37,7 @@ module.exports = function(params) {
     'comment': 'This runs much quicker than the version with images',
     'enabled': true,
     'interval': '0 */25 * * * *', // Every 25 minutes
-    'name': 'Places_Mobile_Images',
+    'name': 'Places_Mobile_Without_Images',
     'task': {
       'type': 'script',
       'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh false'),
