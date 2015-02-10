@@ -3,7 +3,7 @@ var Bluebird = require('bluebird'),
   database = require('datawrap')(config.database.poi_pgs, config.database.defaults),
   fandlebars = require('fandlebars'),
   fs = require('fs'),
-  request = Bluebird.promisify(require('request'));
+  requestPost = Bluebird.promisify(require('request').post);
 
 module.exports = {
   database: function(file, params) {
@@ -42,11 +42,18 @@ module.exports = {
       var runQuery = function(query) {
         return new Bluebird(function(queryResolve, queryReject) {
           var cleanedSql = fandlebars(query, params).replace(/\'null\'/g, 'null'),
-            requestPath = 'https://' + config.cartodb.account + '.cartodb.com/api/v2/sql?q=';
-          requestPath += encodeURIComponent(cleanedSql);
-          requestPath += '&api_key=' + config.cartodb.apiKey;
+            requestPath = 'https://' + config.cartodb.account + '.cartodb.com/api/v2/sql';
+          // requestPath += encodeURIComponent(cleanedSql);
+          // requestPath += '&api_key=' + config.cartodb.apiKey;
           if (cleanedSql.length > 5) {
-            request(requestPath).then(function(r) {
+            console.log('Requesting', requestPath, '(' + cleanedSql + ')');
+            requestPost({
+              'url': requestPath,
+              'form': {
+                'q': cleanedSql,
+                'api_key': config.cartodb.apiKey
+              }
+            }).then(function(r) {
               console.log('CartoDB Command Complete', cleanedSql);
               queryResolve(r);
             }).catch(function(e) {
