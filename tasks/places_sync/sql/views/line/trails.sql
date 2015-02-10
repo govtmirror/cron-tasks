@@ -1,5 +1,5 @@
 DELETE FROM "trails"
-WHERE "places_lines"."cartodb_id" NOT IN (
+WHERE "trails"."cartodb_id" NOT IN (
   SELECT "places_lines"."cartodb_id"
   FROM "places_lines" JOIN "trails" ON
     "trails"."cartodb_id" = "places_lines"."cartodb_id" AND
