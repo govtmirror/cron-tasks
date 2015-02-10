@@ -32,7 +32,7 @@ SELECT
 FROM
   "places_polygons"
 WHERE
-  "places_polygons"."cartodb_id" IN (
+  "places_polygons"."cartodb_id" NOT IN (
     SELECT "places_polygons"."cartodb_id"
     FROM "places_polygons" JOIN "buildings" ON
       "buildings"."cartodb_id" = "places_polygons"."cartodb_id" AND
