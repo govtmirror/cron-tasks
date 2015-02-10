@@ -1,4 +1,10 @@
-TRUNCATE "trails";
+DELETE FROM "trails"
+WHERE "places_lines"."cartodb_id" NOT IN (
+  SELECT "places_lines"."cartodb_id"
+  FROM "places_lines" JOIN "trails" ON
+    "trails"."cartodb_id" = "places_lines"."cartodb_id" AND
+    "trails"."created_at" = "places_lines"."created_at"
+  );
 INSERT INTO
   "trails" (
     "cartodb_id",
@@ -58,5 +64,12 @@ SELECT
 FROM
   "places_lines"
 WHERE
-  ("places_lines"."tags"::json ->> 'highway') = 'path' OR
-  ("places_lines"."tags"::json ->> 'highway') = 'bridleway';
+  "places_lines"."cartodb_id" IN (
+    SELECT places_lines.cartodb_id
+    FROM places_lines JOIN trails ON
+      trails.cartodb_id = places_lines.cartodb_id AND
+      trails.created_at = places_lines.created_at
+  ) AND (
+    ("places_lines"."tags"::json ->> 'highway') = 'path' OR
+    ("places_lines"."tags"::json ->> 'highway') = 'bridleway'
+  );

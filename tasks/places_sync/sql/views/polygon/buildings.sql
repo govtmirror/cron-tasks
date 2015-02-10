@@ -1,4 +1,10 @@
-TRUNCATE "buildings";
+DELETE FROM "buildings"
+WHERE "places_polygons"."cartodb_id" NOT IN (
+  SELECT "places_polygons"."cartodb_id"
+  FROM "places_polygons" JOIN "trails" ON
+    "trails"."cartodb_id" = "places_polygons"."cartodb_id" AND
+    "trails"."created_at" = "places_polygons"."created_at"
+  );
 INSERT INTO
   "buildings" (
     "cartodb_id",
@@ -26,4 +32,10 @@ SELECT
 FROM
   "places_polygons"
 WHERE
+  "places_polygons"."cartodb_id" IN (
+    SELECT "places_polygons"."cartodb_id"
+    FROM "places_polygons" JOIN "trails" ON
+      "trails"."cartodb_id" = "places_polygons"."cartodb_id" AND
+      "trails"."created_at" = "places_polygons"."created_at"
+  ) AND
   ("places_polygons"."tags"::json ->> 'building') IS NOT NULL;
