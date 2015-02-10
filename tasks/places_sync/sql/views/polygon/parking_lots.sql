@@ -1,9 +1,9 @@
 DELETE FROM "parking_lots"
-WHERE "places_polygons"."cartodb_id" NOT IN (
+WHERE "parking_lots"."cartodb_id" NOT IN (
   SELECT "places_polygons"."cartodb_id"
-  FROM "places_polygons" JOIN "trails" ON
-    "trails"."cartodb_id" = "places_polygons"."cartodb_id" AND
-    "trails"."created_at" = "places_polygons"."created_at"
+  FROM "places_polygons" JOIN "parking_lots" ON
+    "parking_lots"."cartodb_id" = "places_polygons"."cartodb_id" AND
+    "parking_lots"."created_at" = "places_polygons"."created_at"
   );
 INSERT INTO
   "parking_lots" (
@@ -33,9 +33,9 @@ FROM
   "places_polygons"
 WHERE
   "places_polygons"."cartodb_id" NOT IN (
-    SELECT "places_polygons"."cartodb_id"
-    FROM "places_polygons" JOIN "trails" ON
-      "trails"."cartodb_id" = "places_polygons"."cartodb_id" AND
-      "trails"."created_at" = "places_polygons"."created_at"
+    SELECT "parking_lots"."cartodb_id"
+    FROM "places_polygons" JOIN "parking_lots" ON
+      "parking_lots"."cartodb_id" = "places_polygons"."cartodb_id" AND
+      "parking_lots"."created_at" = "places_polygons"."created_at"
   ) AND
   ("places_polygons"."tags"::json ->> 'amenity') = 'parking';
