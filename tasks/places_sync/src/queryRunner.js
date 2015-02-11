@@ -3,12 +3,13 @@ var Bluebird = require('bluebird'),
   database = require('datawrap')(config.database.poi_pgs, config.database.defaults),
   fandlebars = require('fandlebars'),
   fs = require('fs'),
-  requestPost = Bluebird.promisify(require('request').post);
+  requestPost = Bluebird.promisify(require('request').post),
+  runList = require('./runList');
 
 module.exports = {
   database: function(file, params) {
     return new Bluebird(function(resolve, reject) {
-      database.runQuery('file:///' + file, params, function(e, r) {
+      database.runQuery('file:///' + fandlebars(file, params), params, function(e, r) {
         if (e) {
           reject(e);
         } else {
@@ -28,7 +29,7 @@ module.exports = {
         var queryText;
         console.log('Running CartoDB Query:', query);
         if (query.substr(0, 7) === 'file://') {
-          queryText = fs.readFileSync(__dirname + '/../sql' + query.substr(7), 'utf8');
+          queryText = fs.readFileSync(__dirname + '/../sql' + fandlebars(query.substr(7), params), 'utf8');
           queryText.split(';').map(function(q) {
             if (q.length > 2) {
               queries.push(q + ';');
@@ -43,8 +44,6 @@ module.exports = {
         return new Bluebird(function(queryResolve, queryReject) {
           var cleanedSql = fandlebars(query, params).replace(/\'null\'/g, 'null'),
             requestPath = 'https://' + config.cartodb.account + '.cartodb.com/api/v2/sql';
-          // requestPath += encodeURIComponent(cleanedSql);
-          // requestPath += '&api_key=' + config.cartodb.apiKey;
           if (cleanedSql.length > 5) {
             console.log('Requesting', requestPath, '(' + cleanedSql + ')');
             requestPost({
@@ -65,43 +64,19 @@ module.exports = {
         });
       };
 
-      /*Bluebird.all(queries.map(runQuery)).then(function(r) {
-        resolve(r);
-      }).catch(function(e) {
-        reject(new Error(e));
-      });*/
-
-      var runOrderedList = function(list) {
-        return new Bluebird(function(listResolve, listReject) {
-          var exec = function(subList, callback) {
-            var nextList = [];
-            runQuery(subList[0]).then(function() {
-              nextList = subList.slice(1);
-              if (nextList.length > 0) {
-                exec(nextList, callback);
-              } else {
-                callback();
-              }
-            }).catch(function(e) {
-              callback(e);
-            });
-          };
-          exec(list, function(e) {
-            if (e) {
-              listReject(e);
-            } else {
-              listResolve();
-            }
-          });
+      var taskList = [];
+      queries.map(function(query) {
+        taskList.push({
+          'task': runQuery,
+          'params': query
         });
-      };
 
-      runOrderedList(queries)
-        .then(function() {
-          console.log('DONE');
-          resolve();
-        })
-        .catch(reject);
+        runList(taskList)
+          .then(function(r) {
+            resolve(r);
+          })
+          .catch(reject);
+      });
     });
   }
 };

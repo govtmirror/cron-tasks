@@ -1,18 +1,15 @@
-var run = require('./src/runType');
+var runList = require('./src/runList'),
+  taskList = [{
+    'name': 'CartoDB Tasks',
+    'task': require('./src/runCartodb.js'),
+    'params': [['point', 'polygon', 'line']]
+  }];
 
-run('point').then(function(pointMsg) {
-  console.log(pointMsg);
-  run('polygon').then(function(polygonMsg) {
-    console.log(polygonMsg);
-    run('line').then(function(lineMsg) {
-      console.log(lineMsg);
-      process.exit();
-    }).catch(function(e) {
-      throw e;
-    });
-  }).catch(function(e) {
-    throw (e);
+runList(taskList)
+  .then(function(r) {
+    console.log('DONNNE', r);
+  })
+  .catch(function(e) {
+    throw e;
   });
-}).catch(function(e) {
-  throw (e);
-});
+
