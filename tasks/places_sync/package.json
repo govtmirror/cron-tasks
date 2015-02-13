@@ -24,7 +24,7 @@
     "bluebird": "2.7.1",
     "datawrap": "git+https://github.com/jimmyrocks/datawrap#master",
     "fandlebars": "git+https://github.com/jimmyrocks/fandlebars#master",
-    "request": "2.51.0"
+    "unirest": "0.4.0"
   },
   "engine": "node 0.10.35"
 }

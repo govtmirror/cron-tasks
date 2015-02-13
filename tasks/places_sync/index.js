@@ -1,15 +1,16 @@
-var runList = require('./src/runList'),
+var runList = require('./node_modules/datawrap/src/runList'),
   taskList = [{
     'name': 'CartoDB Tasks',
     'task': require('./src/runCartodb.js'),
-    'params': [['point', 'polygon', 'line']]
+    'params': [
+      ['point', 'polygon', 'line']
+    ]
   }];
 
-runList(taskList)
+runList(taskList, 'index.js')
   .then(function(r) {
-    console.log('DONNNE', r);
+    console.log('DONE', JSON.stringify(r, null, 1));
   })
   .catch(function(e) {
     throw e;
   });
-
