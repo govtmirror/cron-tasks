@@ -21,7 +21,7 @@ module.exports = function(params) {
     'name': 'Places_SQL_Dump',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places/sql_dump.sh'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/sql_dump.sh'),
     }
   }, {
     'description': 'Updates the GeoJSON file on github',
@@ -30,7 +30,7 @@ module.exports = function(params) {
     'name': 'Places_POI_update',
     'task': {
       'type': 'script',
-      'path': handlebars('eval "$(ssh-agent -s)" && ssh-add /home/npmap/.ssh/npmap-bot/id_rsa && /bin/bash {{tasksDir}}/places/update_geojson.sh'),
+      'path': handlebars('eval "$(ssh-agent -s)" && ssh-add /home/npmap/.ssh/npmap-bot/id_rsa && /bin/bash {{tasksDir}}/places-backup/update_geojson.sh'),
     }
   }, {
     'description': 'Compile json files without images for Places Mobile',
@@ -59,7 +59,7 @@ module.exports = function(params) {
     'name': 'CartoDB_Render',
     'task': {
       'type': 'script',
-      'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places_sync/index.js'),
+      'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js'),
     }
   }];
 };
