@@ -30,7 +30,7 @@ module.exports = function(params) {
     'name': 'Places_POI_update',
     'task': {
       'type': 'script',
-      'path': handlebars('eval "$(ssh-agent -s)" && ssh-add /home/npmap/.ssh/npmap-bot/id_rsa && /bin/bash {{tasksDir}}/places-backup/update_geojson.sh'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/update_geojson.sh'),
     }
   }, {
     'description': 'Compile json files without images for Places Mobile',
@@ -40,7 +40,7 @@ module.exports = function(params) {
     'name': 'Places_Mobile_Without_Images',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh false'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh 0'),
     }
   }, {
     'description': 'Compile json files and images for Places Mobile',
@@ -50,7 +50,7 @@ module.exports = function(params) {
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh true'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh 1'),
     }
   }, {
     'description': 'Syncs the places points, polygons, and lines with CartoDB',
