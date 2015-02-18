@@ -6,7 +6,9 @@ output="/home/npmap/dev/data/places/points_of_interest.geojson"
 output_temp="/home/npmap/dev/data/places/points_of_interest_"$todays_date".geojson"
 sqlFile="get_nodes.sql"
 commitMessage="Updating the points_of_interest.geojson for $todays_date"
+git_rsa_key=/home/npmap/.ssh/npmap-bot/id_rsa
 
+eval $(ssh-agent) > /dev/null && ssh-add $git_rsa_key
 # Do a git fetch for the repo where we're writing
 cd `dirname $output`
 git reset --hard origin && git pull
