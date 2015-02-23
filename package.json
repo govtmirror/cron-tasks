@@ -19,8 +19,8 @@
     "url": "http://github.com/nationalparkservice/cron-tasks"
   },
   "dependencies": {
-    "cron": "1.0.5",
-    "handlebars": "2.0.0",
+    "cron": "1.0.6",
+    "handlebars": "3.0.0",
     "mkdirp": "0.5.0"
   }
 }
