@@ -21,7 +21,7 @@
     "url": "http://github.com/jimmyrocks/cartodb-automate"
   },
   "dependencies": {
-    "bluebird": "2.7.1",
+    "bluebird": "2.9.12",
     "datawrap": "git+https://github.com/jimmyrocks/datawrap#master",
     "fandlebars": "git+https://github.com/jimmyrocks/fandlebars#master",
     "unirest": "0.4.0"
