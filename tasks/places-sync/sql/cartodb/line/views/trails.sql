@@ -71,5 +71,6 @@ WHERE
       trails.created_at = places_lines.created_at
   ) AND (
     ("places_lines"."tags"::json ->> 'highway') = 'path' OR
-    ("places_lines"."tags"::json ->> 'highway') = 'bridleway'
+    ("places_lines"."tags"::json ->> 'highway') = 'bridleway' OR
+    ("places_lines"."tags"::json ->> 'footway') = 'sidewalk'
   );
