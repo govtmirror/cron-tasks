@@ -1,12 +1,12 @@
-DELETE FROM "roads"
-WHERE "roads"."cartodb_id" NOT IN (
+DELETE FROM "streets"
+WHERE "streets"."cartodb_id" NOT IN (
   SELECT "places_lines"."cartodb_id"
-  FROM "places_lines" JOIN "roads" ON
-    "roads"."cartodb_id" = "places_lines"."cartodb_id" AND
-    "roads"."created_at" = "places_lines"."created_at"
+  FROM "places_lines" JOIN "streets" ON
+    "streets"."cartodb_id" = "places_lines"."cartodb_id" AND
+    "streets"."created_at" = "places_lines"."created_at"
   );
 INSERT INTO
-  "roads" (
+  "streets" (
     "cartodb_id",
     "the_geom",
     "name",
@@ -34,9 +34,9 @@ FROM
 WHERE
   "places_lines"."cartodb_id" NOT IN (
     SELECT places_lines.cartodb_id
-    FROM places_lines JOIN roads ON
-      roads.cartodb_id = places_lines.cartodb_id AND
-      roads.created_at = places_lines.created_at
+    FROM places_lines JOIN streets ON
+      streets.cartodb_id = places_lines.cartodb_id AND
+      streets.created_at = places_lines.created_at
   ) AND (
     ("places_lines"."tags"::json ->> 'highway') IN ('motorway', 'trunk', 'primary',
     'secondary', 'tertiary', 'unclassified', 'residential', 'service', 'motorway_link',
