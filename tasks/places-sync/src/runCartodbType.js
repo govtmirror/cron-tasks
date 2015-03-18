@@ -25,23 +25,25 @@ module.exports = function(type) {
               params.cartoDbChanges = 'ARRAY[' + resultIds.join(',') + ']';
               runScript.database(sqlFiles.cartodb.getNewData, params)
                 .then(function(listOfUpdates) {
-                  var cartoDbDeletes = [],
+                  var cartoDbDelete = {}, 
+                    cartoDbDeletes = [],
                     i,
                     numberOfDeletes = 500,
-                    paramParts = [];
+                    paramPart = {};
                   params.newData = listOfUpdates[0].rows;
                   // CartoDB doesn't like a long delete list, so we split up the list
                   for (i = 0; i < resultIds.length; i += numberOfDeletes) {
                     // console.log('Change #', i, '-', i + numberOfDeletes);
-                    paramParts[i] = {
-                      'cartoDbChanges': 'ARRAY[' + resultIds.slice(i, i + (numberOfDeletes - 1)) + ']',
+                    paramPart = {
+                      'cartoDbChanges': 'ARRAY[' + resultIds.slice(i, i + (numberOfDeletes)) + ']',
                       'npsTaskType': type
                     };
-                    cartoDbDeletes[i] = {
+                    cartoDbDelete = {
                       'name': 'remove_' + i,
                       'task': runScript.server,
-                      'params': ['file://' + sqlFiles.cartodb.remove, paramParts[i]]
+                      'params': ['file://' + sqlFiles.cartodb.remove, paramPart]
                     };
+                    cartoDbDeletes.push(cartoDbDelete);
                   }
                   runList(cartoDbDeletes, 'runCartodbType Deletes')
                     .then(function() {
