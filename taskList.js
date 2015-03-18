@@ -46,7 +46,7 @@ module.exports = function(params) {
     'description': 'Compile json files and images for Places Mobile',
     'comment': 'This requires going out to mapbox and checking off the the map thumbnails, so it takes longer',
     'enabled': true,
-    'interval': '0 45 */4 * * *', // Every 2 hours on the 45
+    'interval': '0 45 */3 * * *', // Every 3 hours on the 45
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
@@ -55,11 +55,20 @@ module.exports = function(params) {
   }, {
     'description': 'Syncs the places points, polygons, and lines with CartoDB',
     'enabled': true,
-    'interval': '0 */5 * * * *', // Every 5 minutes
+    'interval': '0 */20 * * * *', // Every 20 minutes
     'name': 'CartoDB_Render',
     'task': {
       'type': 'script',
       'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js'),
+    }
+  }, {
+    'description': 'Syncs the places points, polygons, and lines with CartoDB',
+    'enabled': true,
+    'interval': '0 15 */2 * * *', // Every 2 hours on the 15
+    'name': 'POI Tile Sync',
+    'task': {
+      'type': 'script',
+      'path': '/home/npmap/dev/cron-tasks/tasks/places_sync/sync.sh',
     }
   }];
 };
