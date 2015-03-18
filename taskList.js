@@ -62,7 +62,7 @@ module.exports = function(params) {
       'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js'),
     }
   }, {
-    'description': 'Syncs the places points, polygons, and lines with CartoDB',
+    'description': 'Syncs the places points with Mapbox',
     'enabled': true,
     'interval': '0 15 */2 * * *', // Every 2 hours on the 15
     'name': 'POI Tile Sync',
