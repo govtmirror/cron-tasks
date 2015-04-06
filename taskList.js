@@ -25,7 +25,7 @@ module.exports = function(params) {
     }
   }, {
     'description': 'Updates the GeoJSON file on github',
-    'enabled': true,
+    'enabled': false,
     'interval': '0 20 * * * *', // On the 20 of every hour
     'name': 'Places_POI_update',
     'task': {
