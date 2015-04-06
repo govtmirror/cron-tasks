@@ -20,5 +20,16 @@
       "username": "USERNAME"
     }
   },
+  "slack": {
+    "defaults": {
+      "channel": "CHANNEL",
+      "username": "USERNAME",
+      "text": null
+    },
+    "connection": {
+      "url": "https://hooks.slack.com/services/{{token}}",
+      "token": "GET YOUR URL HERE: https://npmap.slack.com/services/new/incoming-webhook"
+    }
+  },
   "taskName": "automated_task"
 }

@@ -3,6 +3,7 @@ var Bluebird = require('bluebird'),
   fs = require('fs'),
   runScript = require('./queryRunner'),
   runList = require('../node_modules/datawrap/src/runList'),
+  slack = new require('node-slack-web-api')(config.slack),
   sqlFiles = require('../sqlScripts');
 
 module.exports = function(type) {
@@ -25,7 +26,7 @@ module.exports = function(type) {
               params.cartoDbChanges = 'ARRAY[' + resultIds.join(',') + ']';
               runScript.database(sqlFiles.cartodb.getNewData, params)
                 .then(function(listOfUpdates) {
-                  var cartoDbDelete = {}, 
+                  var cartoDbDelete = {},
                     cartoDbDeletes = [],
                     i,
                     numberOfDeletes = 500,
@@ -73,6 +74,7 @@ module.exports = function(type) {
                               });
                             });
                           }
+                          slack('Updated' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : ''));
                           if (viewList.length > 0) {
                             runList(viewList, 'runCartodbType Views')
                               .then(function() {
