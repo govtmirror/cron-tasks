@@ -74,7 +74,9 @@ module.exports = function(type) {
                               });
                             });
                           }
-                          slack('Updated' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : ''));
+                          if (insertList.length > 0) {
+                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB');
+                          }
                           if (viewList.length > 0) {
                             runList(viewList, 'runCartodbType Views')
                               .then(function() {
