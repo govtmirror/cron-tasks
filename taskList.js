@@ -50,7 +50,7 @@ module.exports = function(params) {
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh 1'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh map_thumbnail'),
     }
   }, {
     'description': 'Syncs the places points, polygons, and lines with CartoDB',
