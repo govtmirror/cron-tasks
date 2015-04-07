@@ -55,7 +55,7 @@ module.exports = function(params) {
   }, {
     'description': 'Syncs the places points, polygons, and lines with CartoDB',
     'enabled': true,
-    'interval': '0 */20 * * * *', // Every 20 minutes
+    'interval': '0 */10 * * * *', // Every 10 minutes
     'name': 'CartoDB_Render',
     'task': {
       'type': 'script',
