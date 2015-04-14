@@ -10,13 +10,13 @@ var tasks = [
   // Download the latest version of the tiles from the server
   'downloadMbtiles',
   // Read the mapbox-studio project to get the min/max Zooms, buffer size, and other params
-  // 'readStudioFile',
+  'readStudioFile',
   // Remove the tiles that have been updated from the mbtiles file (if we don't delete them there are sometimes errors with tileliveCopy)
-  // 'removeTiles',
+  'removeTiles',
   // Generate (only) the new tiles into the mbtiles file using tileliveCopy
-  // 'generateTiles',
+  'generateTiles',
   // Upload the tiles to mapbox
-  // 'uploadMBtiles',
+  'uploadMBtiles',
   // Complete task
   'completeTask'
 ];
