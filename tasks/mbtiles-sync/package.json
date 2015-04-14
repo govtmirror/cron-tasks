@@ -1,5 +1,5 @@
 {
-  "name": "tm2-automate",
+  "name": "mbtiles-sync",
   "version": "0.0.4",
   "description": "Automates the usage of tm2 with NPS Park Tiles",
   "keywords": [
@@ -23,12 +23,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/nationalparkservice/tm2-automate"
+    "url": "http://github.com/nationalparkservice/cron-tasks"
   },
   "dependencies": {
     "bluebird": "2.9.24",
     "datawrap": "git+https://github.com/jimmyrocks/datawrap#master",
-    "fandlebars": "git+https://github.com/jimmyrocks/fandlebars#master",
     "js-yaml": "3.2.7",
     "mapbox-upload": "3.1.0",
     "mbtiles": "0.7.9",
