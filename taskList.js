@@ -64,11 +64,11 @@ module.exports = function(params) {
   }, {
     'description': 'Syncs the places points with Mapbox',
     'enabled': true,
-    'interval': '0 15 */2 * * *', // Every 2 hours on the 15
+    'interval': '0 15 */1 * * *', // Every 1 hour on the 15
     'name': 'POI Tile Sync',
     'task': {
       'type': 'script',
-      'path': '/home/npmap/dev/cron-tasks/tasks/places_sync/sync.sh',
+      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js',
     }
   }];
 };
