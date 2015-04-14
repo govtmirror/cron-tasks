@@ -10,7 +10,7 @@ var yaml = require('js-yaml');
 
 module.exports = {
   'getTiles': function(res) {
-    console.log('Getting Tiles');
+    // Getting Tiles
     return new Bluebird(function(fulfill, reject) {
       var db = datawrap(res.config.database, res.config.database.defaults);
       var params = {
@@ -21,7 +21,6 @@ module.exports = {
           reject(startError);
         } else {
           db.runQuery(res.config.interfaces[res.settings.type].getChanges, params, function(e, r) {
-            console.log(r[0].rows);
             if (e) {
               reject(e);
             } else {
@@ -45,7 +44,7 @@ module.exports = {
     });
   },
   'downloadMbtiles': function(res) {
-    console.log('Downloading MBtiles');
+    // Downloading MBtiles
     return new Bluebird(function(fulfill, reject) {
       var path = res.config.interfaces[res.settings.type].tempDirectory + '/' + res.config.interfaces[res.settings.type].mbtiles.mapboxId + '.mbtiles';
       if (res.config.interfaces[res.settings.type].mbtiles.downloadFromServer) {
@@ -72,7 +71,7 @@ module.exports = {
     });
   },
   'readStudioFile': function(res) {
-    console.log('Reading Studio File');
+    // Reading Studio File
     return new Bluebird(function(fulfill, reject) {
       fs.readFile(res.config.interfaces[res.settings.type].mapboxStudio.projectPath + '/data.yml', function(e, r) {
         if (e) {
@@ -84,7 +83,7 @@ module.exports = {
     });
   },
   'removeTiles': function(res) {
-    console.log('Removing Tiles');
+    // Removing Tiles
     return new Bluebird(function(fulfill, reject) {
       var params = {
           path: res.downloadMbtiles.path
@@ -122,15 +121,13 @@ module.exports = {
     });
   },
   'generateTiles': function(res) {
-    console.log('Generating Tiles');
+    // Generating Tiles
     return new Bluebird(function(fulfill, reject) {
       var tileliveCopyPath = res.config.interfaces[res.settings.type].tileliveCopyPath;
       var tileData = coordsToTiles(res.getTiles.bboxList, res.readStudioFile.minzoom, res.readStudioFile.maxzoom, res.readStudioFile.Layer[0].properties['buffer-size']).map(function(row) {
         return row[0] + '/' + row[1] + '/' + row[2];
       }).join('\n');
       fs.writeFile(res.config.interfaces[res.settings.type].tileFile, tileData, function(writeError) {
-        console.log(res.config.interfaces[res.settings.type].tileFile);
-        console.log(tileData);
         if (writeError) {
           reject(writeError);
         } else {
@@ -142,7 +139,6 @@ module.exports = {
             'mbtiles://' + res.downloadMbtiles.path
           ].join('');
           // For long-lived processes, it's best to run exec() asynchronously as the current synchronous implementation uses a lot of CPU
-          console.log(tileliveCopyPath + ' ' + params);
           shelljs.exec(tileliveCopyPath + ' ' + params, function(tileliveError, tileliveOutput) {
             // Delete the temp tilefile
             shelljs.rm(res.config.interfaces[res.settings.type].tileFile);
@@ -161,25 +157,22 @@ module.exports = {
     });
   },
   'uploadMBtiles': function(res) {
-    console.log('Uploading Tiles');
+    // Uploading Tiles
     return new Bluebird(function(fulfill, reject) {
       mapboxUpload({
-        account: res.config.mapbox.account,
-        accesstoken: res.config.mapbox.accesstoken,
-        file: res.downloadMbtiles.path,
-        mapid: res.config.interfaces[res.settings.type].mbtiles.mapboxId
-      }, function(e, r) {
-        console.log(e, r);
-        if (e) {
-          reject(e);
-        } else {
+          account: res.config.mapbox.account,
+          accesstoken: res.config.mapbox.accesstoken,
+          file: res.downloadMbtiles.path,
+          mapid: res.config.interfaces[res.settings.type].mbtiles.mapboxId
+        })
+        .on('error', reject)
+        .once('finished', function() {
           fulfill(true);
-        }
-      });
+        });
     });
   },
   'completeTask': function(res) {
-    console.log('Completing task');
+    // Completing task
     return new Bluebird(function(fulfill) {
       if (res.downloadMbtiles.downloaded) {
         shelljs.rm(res.downloadMbtiles.path);
