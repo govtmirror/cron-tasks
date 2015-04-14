@@ -1,0 +1,43 @@
+{
+  "name": "tm2-automate",
+  "version": "0.0.4",
+  "description": "Automates the usage of tm2 with NPS Park Tiles",
+  "keywords": [
+    "nps",
+    "OpenStreetMap",
+    "postgres",
+    "cartodb",
+    "mapbox"
+  ],
+  "author": "Jim McAndrew <james_mcandrew@partner.nps.gov>",
+  "license": "Public Domain",
+  "contributors": [{
+    "name": "Jim McAndrew",
+    "email": "james_mcandrew@partner.nps.gov"
+  }, {
+    "name": "Nate Irwin",
+    "email": "nate_irwin@nps.gov"
+  }],
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nationalparkservice/tm2-automate"
+  },
+  "dependencies": {
+    "bluebird": "2.9.24",
+    "datawrap": "git+https://github.com/jimmyrocks/datawrap#master",
+    "fandlebars": "git+https://github.com/jimmyrocks/fandlebars#master",
+    "js-yaml": "3.2.7",
+    "mapbox-upload": "3.1.0",
+    "mbtiles": "0.7.9",
+    "minimist": "1.1.1",
+    "mkdirp": "0.5.0",
+    "request": "2.55.0",
+    "shelljs": "0.4.0",
+    "sqlite3": "3.0.5",
+    "tilelive": "5.6.2",
+    "tilelive-bridge": "1.2.7"
+  }
+}
