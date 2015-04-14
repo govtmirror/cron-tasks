@@ -1,6 +1,7 @@
-var config = require('./config');
-var fandlebars = require('datawrap').fandlebars;
-var tools = require('./src/tools');
+var config = require('./config'),
+  fandlebars = require('datawrap').fandlebars,
+  slack = require('node-slack-web-api')(config.slack),
+  tools = require('./src/tools');
 
 
 var tasks = [
@@ -51,7 +52,21 @@ var runNextTask = function(taskList, results, callback) {
 
 
 runNextTask(tasks, null, function(e, r) {
-  console.log(e ? 'Error!!' : 'No problems');
+  var slackMessage = 'poi mbtiles-sync';
+  if (e) {
+    slackMessage += ' error: ' + e;
+  } else {
+    if (r.getTiles && r.getTiles.error) {
+      slackMessage += ': ' + r.getTiles.error;
+    } else if (r.getTiles && r.getTiles.result && r.getTiles.result.rows) {
+      slackMessage += ': ' + r.getTiles.result.rows.length + ' geometr' + (r.getTiles.result.rows.length === 1 ? 'y' : 'ies') + ' updated';
+    } else {
+      slackMessage += ': Unexpected Result';
+    }
+  }
   console.log(e, r);
-  process.exit(e ? 1 : 0);
+  slack(slackMessage)
+    .then(function() {
+      process.exit(e ? 1 : 0);
+    });
 });
