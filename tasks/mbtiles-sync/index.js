@@ -10,13 +10,13 @@ var tasks = [
   // Download the latest version of the tiles from the server
   'downloadMbtiles',
   // Read the mapbox-studio project to get the min/max Zooms, buffer size, and other params
-  'readStudioFile',
+  // 'readStudioFile',
   // Remove the tiles that have been updated from the mbtiles file (if we don't delete them there are sometimes errors with tileliveCopy)
-  'removeTiles',
+  // 'removeTiles',
   // Generate (only) the new tiles into the mbtiles file using tileliveCopy
-  'generateTiles',
+  // 'generateTiles',
   // Upload the tiles to mapbox
-  'uploadMBtiles',
+  // 'uploadMBtiles',
   // Complete task
   'completeTask'
 ];
@@ -43,25 +43,24 @@ var runNextTask = function(taskList, results, callback) {
       .catch(function(err) {
         console.log('******************* ERROR *******************');
         console.log(JSON.stringify(err, null, 2));
-        throw (err.stack ? err : new Error(err));
+        if (callback) callback(err, results);
       });
   } else {
     if (callback) callback(results.errors, results);
   }
 };
 
-
-runNextTask(tasks, null, function(e, r) {
-  var slackMessage = 'poi mbtiles-sync';
+var finish = function(e, r) {
+  var slackMessage = 'poi mbtiles-sync: ';
   if (e) {
-    slackMessage += ' error: ' + e;
+    slackMessage += e;
   } else {
     if (r.getTiles && r.getTiles.error) {
-      slackMessage += ': ' + r.getTiles.error;
+      slackMessage += r.getTiles.error;
     } else if (r.getTiles && r.getTiles.result && r.getTiles.result.rows) {
-      slackMessage += ': ' + r.getTiles.result.rows.length + ' geometr' + (r.getTiles.result.rows.length === 1 ? 'y' : 'ies') + ' updated';
+      slackMessage += r.getTiles.result.rows.length + ' geometr' + (r.getTiles.result.rows.length === 1 ? 'y' : 'ies') + ' updated';
     } else {
-      slackMessage += ': Unexpected Result';
+      slackMessage += 'Unexpected Result';
     }
   }
   console.log(e, r);
@@ -69,4 +68,20 @@ runNextTask(tasks, null, function(e, r) {
     .then(function() {
       process.exit(e ? 1 : 0);
     });
+};
+
+runNextTask(tasks, null, function(e, r) {
+  if (e && !r.clearErrors) {
+    tools.clearErrors(r)
+      .then(function(ceR) {
+        r.clearErrors = ceR;
+        finish(e, r);
+      })
+      .catch(function(ceE) {
+        r.clearErrors = ceE;
+        finish(e, r);
+      });
+  } else {
+    finish(e, r);
+  }
 });

@@ -179,5 +179,16 @@ module.exports = {
       }
       fulfill(true);
     });
+  },
+  'clearErrors': function(res) {
+    return new Bluebird(function(fulfill, reject) {
+      var db = datawrap(res.config.database, res.config.database.defaults);
+      var params = {
+        'taskName': res.config.interfaces[res.settings.type].taskName
+      };
+      db.runQuery(res.config.interfaces[res.settings.type].clearErrors, params)
+        .then(fulfill)
+        .catch(reject);
+    });
   }
 };
