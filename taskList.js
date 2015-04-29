@@ -62,13 +62,22 @@ module.exports = function(params) {
       'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js'),
     }
   }, {
-    'description': 'Syncs the places points with Mapbox',
+    'description': 'Syncs the places points with Mapbox (nps.places_poi)',
     'enabled': true,
     'interval': '0 15 * * * *', // Every 1 hour on the 15
     'name': 'POI Tile Sync',
     'task': {
       'type': 'script',
-      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js',
+      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js places_points',
+    }
+  }, {
+    'description': 'Syncs all of the places data with Mapbox (nps.nps-places-data)',
+    'enabled': true,
+    'interval': '0 45 * * * *', // Every 1 hour on the 45
+    'name': 'POI Tile Sync',
+    'task': {
+      'type': 'script',
+      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js places_data',
     }
   }];
 };
