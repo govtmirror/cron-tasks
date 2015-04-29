@@ -64,7 +64,7 @@ module.exports = function(params) {
   }, {
     'description': 'Syncs the places points with Mapbox',
     'enabled': true,
-    'interval': '0 15 */1 * * *', // Every 1 hour on the 15
+    'interval': '0 15 * * * *', // Every 1 hour on the 15
     'name': 'POI Tile Sync',
     'task': {
       'type': 'script',

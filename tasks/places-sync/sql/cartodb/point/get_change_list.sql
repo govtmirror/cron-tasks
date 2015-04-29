@@ -1,3 +1,6 @@
+-- Run the tool to update data
+pgs_update();
+
 -- Get a list of all the ids that have changed since the last run
 SELECT
   array_agg("new_and_changed"."osm_id") AS "ids"
