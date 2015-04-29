@@ -29,6 +29,21 @@
       "tileFile": "{{env.PWD}}/tmp/tiles.txt",
       "tileliveCopyPath": "{{env.PWD}}/node_modules/tilelive/bin/tilelive-copy",
       "tempDirectory": "{{env.PWD}}/tmp"
+    },
+    "places_data": {
+      "mbtiles": {
+        "downloadFromServer": false,
+        "mapboxId": "MAPBOXID"
+      },
+      "mapboxStudio": {
+        "projectPath": "{{env.PWD}}/PATH/TO/PROJECT"
+      },
+      "getChanges": "file:///getChangedPoints.sql",
+      "startTask": "file:///startTask.sql",
+      "taskName": "test",
+      "tileFile": "{{env.PWD}}/tmp/tiles.txt",
+      "tileliveCopyPath": "{{env.PWD}}/node_modules/tilelive/bin/tilelive-copy",
+      "tempDirectory": "{{env.PWD}}/tmp"
     }
   },
   "mapbox": {
