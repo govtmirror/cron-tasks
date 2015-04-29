@@ -53,7 +53,7 @@ var runNextTask = function(taskList, results, callback) {
 var finish = function(e, r) {
   var slackMessage = 'poi mbtiles-sync: ';
   if (e) {
-    slackMessage += e;
+    slackMessage += JSON.stringify(e);
   } else {
     if (r.getTiles && r.getTiles.error) {
       slackMessage += r.getTiles.error;
