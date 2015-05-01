@@ -21,12 +21,12 @@ WHERE
   rendered <= (
     SELECT COALESCE(MAX("run_time"), NOW())
     FROM "nps_render_log"
-    WHERE "task_name" = {{task_name}}
+    WHERE "task_name" = {{taskName}}
     ) AND
   rendered > (
     SELECT COALESCE(MAX(a."run_time"), '2010-01-01'::timestamp without time zone)
     FROM "nps_render_log" a
-    WHERE a."task_name" = {{task_name}} AND
+    WHERE a."task_name" = {{taskName}} AND
           a.render_id < (SELECT max(b.render_id) FROM "nps_render_log" b where b."task_name" = a.task_name)
     ) AND
   the_geom IS NOT null;
