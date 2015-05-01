@@ -82,7 +82,7 @@ module.exports = function(type) {
                             linkUrl += params.cartoDbChanges;
                             linkUrl += ');&api_key=' + config.database.cartodb.apiKey;
                             linkUrl += '&format=geojson';
-                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <' + linkUrl + '|View GeoJSON>');
+                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <' + btoa(linkUrl) + '|View GeoJSON>');
                           }
                           if (viewList.length > 0) {
                             runList(viewList, 'runCartodbType Views')
