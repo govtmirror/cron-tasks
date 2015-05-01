@@ -1,5 +1,5 @@
 -- Run the tool to update data
-pgs_update();
+SELECT * FROM pgs_update();
 
 -- Get a list of all the ids that have changed since the last run
 SELECT
