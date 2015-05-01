@@ -1,4 +1,5 @@
 var Bluebird = require('bluebird'),
+  btoa = require('btoa'),
   config = require('../config'),
   fs = require('fs'),
   runScript = require('./queryRunner'),
