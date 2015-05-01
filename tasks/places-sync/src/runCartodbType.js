@@ -18,8 +18,8 @@ module.exports = function(type) {
         runScript.database(sqlFiles.cartodb.getChangeList, params)
           .then(function(result) {
             var resultIds;
-            if (result && result[0] && result[0].rows && result[0].rows[0] && result[0].rows[0].ids) {
-              resultIds = result[0].rows[0].ids;
+            if (result && result[1] && result[1].rows && result[1].rows[0] && result[1].rows[0].ids) {
+              resultIds = result[1].rows[0].ids;
               // console.log('Updating ' + type + '!');
               // console.log('New ID', resultIds);
               params.changes = '{' + resultIds.join(',') + '}';
