@@ -10,11 +10,11 @@ SELECT
 FROM
   (
     SELECT "the_geom", "osm_id", "rendered", 'W'::char(1) as "member_type", 'nps_render_polygon' as "source" FROM nps_render_polygon
-    UNION
+    UNION ALL
     SELECT "the_geom", "osm_id", "rendered", 'W'::char(1) as "member_type", 'nps_render_line' as "source" FROM nps_render_line
-    UNION
+    UNION ALL
     SELECT "the_geom", "osm_id", "rendered", 'N'::char(1) as "member_type", 'nps_render_point' as "source" FROM nps_render_point
-    UNION
+    UNION ALL
     SELECT "way" as "the_geom", "osm_id", "change_time" as "rendered", "member_type", 'nps_change_log' as "source" FROM nps_change_log
     ) q
 WHERE
