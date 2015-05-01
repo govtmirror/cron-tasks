@@ -1,3 +1,6 @@
+-- Run the tool to update data
+SELECT * FROM pgs_update();
+
 -- Write to the table that we're running the script
 -- We do this first to capture changes that happen while it's running
 INSERT INTO
