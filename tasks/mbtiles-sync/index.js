@@ -1,4 +1,5 @@
-var config = require('./config'),
+var args = process.argv.slice(2),
+  config = require('./config'),
   fandlebars = require('datawrap').fandlebars,
   slack = require('node-slack-web-api')(config.slack),
   tools = require('./src/tools');
@@ -26,7 +27,7 @@ var runNextTask = function(taskList, results, callback) {
   results = results ? results : {
     'config': fandlebars.obj(config, global.process),
     'settings': {
-      'type': 'places_points'
+      'type': args[0] || 'places_points'
     }
   };
   if (taskList.length) {
