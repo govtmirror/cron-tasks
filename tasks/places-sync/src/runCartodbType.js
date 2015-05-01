@@ -75,7 +75,14 @@ module.exports = function(type) {
                             });
                           }
                           if (insertList.length > 0) {
-                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB');
+                            var linkUrl = 'https://' + config.database.cartodb.account;
+                            linkUrl += '.cartodb.com/api/v2/sql?q=SELECT%20*%20FROM%20';
+                            linkUrl += type === 'point' ? 'points_of_interest' : type === 'line' ? 'places_lines' : 'places_polygons''
+                            linkUrl += '%20where%20cartodb_id%20=%20ANY%20(';
+                            linkUrl += 'places_lines';
+                            linkUrl += ');&api_key=' + config.database.cartodb.apiKey;
+                            linkUrl += '&format=html';
+                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <a href="' + linkUrl + '">View GeoJSON</a>');
                           }
                           if (viewList.length > 0) {
                             runList(viewList, 'runCartodbType Views')
