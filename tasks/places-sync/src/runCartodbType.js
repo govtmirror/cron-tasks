@@ -82,7 +82,7 @@ module.exports = function(type) {
                             linkUrl += params.cartoDbChanges;
                             linkUrl += ');&api_key=' + config.database.cartodb.apiKey;
                             linkUrl += '&format=geojson';
-                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <' + btoa(linkUrl) + '|View GeoJSON>');
+                            slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <http://www.nps.gov/maps/full.html?mapId=daafb8e5-280a-4914-b3f5-7d160a453f9a&url=' + btoa(linkUrl) + '|View GeoJSON>');
                           }
                           if (viewList.length > 0) {
                             runList(viewList, 'runCartodbType Views')
