@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "bluebird": "2.9.12",
-    "btoa", "1.1.2",
+    "btoa": "1.1.2",
     "datawrap": "git+https://github.com/jimmyrocks/datawrap#master",
     "fandlebars": "git+https://github.com/jimmyrocks/fandlebars#master",
     "node-slack-web-api": "git+https://github.com/nationalparkservice/node-slack-web-api.git",
