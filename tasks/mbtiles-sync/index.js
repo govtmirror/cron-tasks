@@ -52,8 +52,8 @@ var runNextTask = function(taskList, results, callback) {
 };
 
 var finish = function(e, r) {
-  var slackMessage = 'poi mbtiles-sync: ';
-  if (e) {
+  var slackMessage = '';
+  if (e && e !== 'No new tiles') {
     slackMessage += JSON.stringify(e);
   } else {
     if (r.getTiles && r.getTiles.error) {
@@ -65,10 +65,15 @@ var finish = function(e, r) {
     }
   }
   console.log(e, r);
+  if (slackMessage.length > 0) {
+  slackMessage = 'poi mbtiles-sync: ' + slackMessage;
   slack(slackMessage)
     .then(function() {
       process.exit(e ? 1 : 0);
     });
+  } else {
+     process.exit(e ? 1 : 0); 
+  }
 };
 
 runNextTask(tasks, null, function(e, r) {
