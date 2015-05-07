@@ -65,7 +65,7 @@ var finish = function(e, r) {
     }
   }
   console.log(e, r);
-  if (slackMessage.length > 0) {
+  if (slackMessage.length > 0 && !slackMessage.match('No New Tiles')) {
   slackMessage = 'poi mbtiles-sync: ' + slackMessage;
   slack(slackMessage)
     .then(function() {
