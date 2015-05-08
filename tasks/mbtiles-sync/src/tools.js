@@ -124,16 +124,18 @@ module.exports = {
     // Generating Tiles
     return new Bluebird(function(fulfill, reject) {
       var tileliveCopyPath = res.config.interfaces[res.settings.type].tileliveCopyPath;
+      var tmpTileFile = res.config.interfaces[res.settings.type].tileFile.replace('tiles',Math.random().toString(32).substr(2));
       var tileData = coordsToTiles(res.getTiles.bboxList, res.readStudioFile.minzoom, res.readStudioFile.maxzoom, res.readStudioFile.Layer[0].properties['buffer-size']).map(function(row) {
         return row[0] + '/' + row[1] + '/' + row[2];
       }).join('\n');
-      fs.writeFile(res.config.interfaces[res.settings.type].tileFile, tileData, function(writeError) {
+      fs.writeFile(tmpTileFile, tileData, function(writeError) {
         if (writeError) {
+          console.log('************ ERROR Writing the tilefile ***************');
           reject(writeError);
         } else {
           var params = [
             ' --scheme=', 'list',
-            ' --list=', res.config.interfaces[res.settings.type].tileFile,
+            ' --list=', tmpTileFile,
             ' --concurrency=', '16', ' ',
             'bridge://' + res.config.interfaces[res.settings.type].mapboxStudio.projectPath, '/data.xml', ' ',
             'mbtiles://' + res.downloadMbtiles.path
@@ -141,7 +143,7 @@ module.exports = {
           // For long-lived processes, it's best to run exec() asynchronously as the current synchronous implementation uses a lot of CPU
           shelljs.exec(tileliveCopyPath + ' ' + params, function(tileliveError, tileliveOutput) {
             // Delete the temp tilefile
-            shelljs.rm(res.config.interfaces[res.settings.type].tileFile);
+            shelljs.rm(tmpTileFile);
 
             if (tileliveError) {
               console.log('************ TILELIVE ERROR ***************');
