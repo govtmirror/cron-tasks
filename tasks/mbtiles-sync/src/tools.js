@@ -144,6 +144,7 @@ module.exports = {
             shelljs.rm(res.config.interfaces[res.settings.type].tileFile);
 
             if (tileliveError) {
+              console.log('************ TILELIVE ERROR ***************');
               reject({
                 'description': 'tileliveError',
                 'error': tileliveError
