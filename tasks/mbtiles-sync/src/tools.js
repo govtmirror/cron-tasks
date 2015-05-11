@@ -124,7 +124,7 @@ module.exports = {
     // Generating Tiles
     return new Bluebird(function(fulfill, reject) {
       var tileliveCopyPath = res.config.interfaces[res.settings.type].tileliveCopyPath;
-      var tmpTileFile = res.config.interfaces[res.settings.type].tileFile.replace('tiles',Math.random().toString(32).substr(2));
+      var tmpTileFile = res.config.interfaces[res.settings.type].tileFile + Math.random().toString(32).substr(2);
       var tileData = coordsToTiles(res.getTiles.bboxList, res.readStudioFile.minzoom, res.readStudioFile.maxzoom, res.readStudioFile.Layer[0].properties['buffer-size']).map(function(row) {
         return row[0] + '/' + row[1] + '/' + row[2];
       }).join('\n');
