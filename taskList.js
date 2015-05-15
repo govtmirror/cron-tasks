@@ -68,7 +68,7 @@ module.exports = function(params) {
     'name': 'POI Tile Sync',
     'task': {
       'type': 'script',
-      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js places_points',
+      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_park_pois',
     }
   }, {
     'description': 'Syncs all of the places data with Mapbox (nps.nps-places-data)',
@@ -77,7 +77,7 @@ module.exports = function(params) {
     'name': 'POI Tile Sync',
     'task': {
       'type': 'script',
-      'path': '/usr/bin/node /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/index.js places_data',
+      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_places_data',
     }
   }];
 };
