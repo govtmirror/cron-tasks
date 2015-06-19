@@ -1,5 +1,6 @@
 this_pg_dump=/usr/lib/postgresql/9.4/bin/pg_dump
-output_dir="/home/npmap/dev/backups/"
+# output_dir="/home/npmap/dev/backups/"
+output_dir="/mnt/backups/"
 api_filename="api_bk_`date "+%Y%m%d"`.tar"
 pgs_filename="poi_bk_`date "+%Y%m%d"`.tar"
 
