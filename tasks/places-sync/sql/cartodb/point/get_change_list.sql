@@ -59,7 +59,7 @@ FROM
       '2010-01-01'::timestamp without time zone
     ) as "start_time") "render_time"
   WHERE
-    "nps_change_log"."change_time" >= "render_time"."start_time" AND
-    "nps_change_log"."change_time" <= "render_time"."end_time" AND
+    "nps_change_log"."created" >= "render_time"."start_time" AND
+    "nps_change_log"."created" <= "render_time"."end_time" AND
     "nps_change_log"."member_type" = 'N'
 ) "new_and_changed";
