@@ -1,9 +1,8 @@
-var Bluebird = require('bluebird'),
-  btoa = require('btoa'),
+var btoa = require('btoa'),
   config = require('../config'),
+  datawrap = require('datawrap'),
   fs = require('fs'),
   runScript = require('./queryRunner'),
-  runList = require('../node_modules/datawrap/src/runList'),
   slack = new require('node-slack-web-api')(config.slack),
   sqlFiles = require('../sqlScripts');
 
@@ -13,7 +12,7 @@ module.exports = function(type) {
     'npsTaskType': type
   };
 
-  return new Bluebird(function(resolve, reject) {
+  return new datawrap.Bluebird(function(resolve, reject) {
     runScript.database(sqlFiles.writeStartTime, params)
       .then(function() {
         runScript.database(sqlFiles.cartodb.getChangeList, params)
@@ -47,7 +46,7 @@ module.exports = function(type) {
                     };
                     cartoDbDeletes.push(cartoDbDelete);
                   }
-                  runList(cartoDbDeletes, 'runCartodbType Deletes')
+                  datawrap.runList(cartoDbDeletes, 'runCartodbType Deletes')
                     .then(function() {
                       var insertList = [];
                       params.newData.map(function(row) {
@@ -58,7 +57,7 @@ module.exports = function(type) {
                           'params': ['file://' + sqlFiles.cartodb.insert, row]
                         });
                       });
-                      runList(insertList, 'runCartodbType Inserts')
+                      datawrap.runList(insertList, 'runCartodbType Inserts')
                         .then(function() {
                           // Post Sync Transactions
                           var postSyncTasks = fs.readdirSync(__dirname + '/../sql/cartodb/' + type).indexOf('views') > -1,
@@ -86,7 +85,7 @@ module.exports = function(type) {
                             slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <http://www.nps.gov/maps/full.html?mapId=daafb8e5-280a-4914-b3f5-7d160a453f9a&url=' + btoa(linkUrl) + '|View GeoJSON>');
                           }
                           if (viewList.length > 0) {
-                            runList(viewList, 'runCartodbType Views')
+                            datawrap.runList(viewList, 'runCartodbType Views')
                               .then(function() {
                                 resolve('Done with ' + type + 's and its ' + viewList.length + ' materialized view' + (viewList.length > 1 ? 's!' : '!'));
                               }).catch(function(e) {

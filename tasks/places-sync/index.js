@@ -1,4 +1,4 @@
-var runList = require('./node_modules/datawrap/src/runList'),
+var runList = require('datawrap').runList,
   taskList = [{
     'name': 'CartoDB Tasks',
     'task': require('./src/runCartodb.js'),

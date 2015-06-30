@@ -1,6 +1,6 @@
-var Bluebird = require('bluebird'),
+var Bluebird = require('datawrap').Bluebird,
   run = require('./runCartodbType'),
-  runList = require('../node_modules/datawrap/src/runList');
+  runList = require('datawrap').runList;
 
 module.exports = function(types) {
   var finished = false;
