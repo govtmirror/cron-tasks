@@ -1,0 +1,35 @@
+{
+  "database": {
+    "defaults": {
+      "rootDirectory": "{{env.PWD}}/sql",
+      "delimiter": ";",
+      "fileDesignator": "file:///",
+      "fileOptions": {
+        "encoding": "utf8"
+      }
+    },
+    "cartodb": {
+      "account": "nps",
+      "apiKey": "{{secrets.cartodb.apiKey}}",
+      "type": "cartodb"
+    },
+    "poi_pgs": {
+      "address": "{{secrets.poi_pgs.address}}",
+      "dbname": "places_pgs",
+      "password": "{{secrets.poi_pgs.password}}",
+      "type": "postgresql",
+      "username": "{{secrets.poi_pgs.username}}"
+    }
+  },
+  "slack": {
+    "defaults": {
+      "channel": "#feeds",
+      "username": "npmap-bot",
+      "text": null
+    },
+    "connection": {
+      "url": "https://hooks.slack.com/services/{{token}}",
+      "token": "{{secrets.slack.token}}"
+    }
+  }
+}
