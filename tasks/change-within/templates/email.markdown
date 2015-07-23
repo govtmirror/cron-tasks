@@ -3,6 +3,12 @@
 ##{{parkFullName}} Summary
 From {{startDate}} - {{endData}}
 
+##Changesets
+
+Changeset | User | Count
+:---:|:-----:
+[{{ChangesetX}}]() | **{{usernameX}}** | **count**
+
 Geometry Type            | Count
 :-----------------------:|:----------------------:
 [points]({{map}})        | **{{pointCount}}**
