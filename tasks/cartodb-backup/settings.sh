@@ -1,6 +1,5 @@
 #!/bin/bash
 CartoDB_file_type="csv"
-CartoDB_account="nps"
 CartoDB_api_key_file="./secrets/cartodb_api_key.txt"
 CartoDB_table_list_file="./tables.txt"
 CartoDB_destination="./backup"
