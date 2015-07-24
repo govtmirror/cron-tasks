@@ -3,6 +3,14 @@
 ##{{parkFullName}} Summary
 From {{startDate}} - {{endData}}
 
+##Changesets
+
+Changeset | User | Count
+:-----------------:|:-----------------:|:---------:
+[{{ChangesetX}}]() | **{{usernameX}}** | **count**
+
+###Geometries
+
 Geometry Type            | Count
 :-----------------------:|:----------------------:
 [points]({{map}})        | **{{pointCount}}**
@@ -11,14 +19,14 @@ Geometry Type            | Count
 [Total Changes]({{map}}) | **{{totalCount}}**
 
 
-##Top 10 Feature Types
+###Top 10 Feature Types
 
 Feature Type | Count
 :---:|:-----:
 [{{featureTypeX}}]()| **{{userCountX}}**
 
 
-##Top 10 Users
+###Top 10 Users
 
 User | Count
 :---:|:-----:
