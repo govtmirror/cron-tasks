@@ -1,2 +1,15 @@
-nps, wilderness_areas
-nps, im_networks
+nps, places_mobile_events
+nps, places_mobile_more_pages
+nps, places_mobile_more
+nps, places_mobile_services
+nps, places_mobile_media
+nps, places_mobile_categories
+nps, places_mobile_faqs_questions
+nps, places_mobile_urls
+nps, places_mobile_more_alerts
+nps, places_mobile_parks
+nps, places_mobile_information
+nps, places_mobile_more_searches
+nps, places_mobile_tours_sites
+nps, places_mobile_tours
+nps, places_mobile_sites
