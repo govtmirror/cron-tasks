@@ -6,10 +6,12 @@ function downloadTables ()
   source "./settings.sh"
   local api_key=$(cat $CartoDB_api_key_file)
   local destination=$CartoDB_destination
-  local account=$CartoDB_account
   local file_type=$CartoDB_file_type
-  local tables=$(cat $CartoDB_table_list_file)
+  # local tables=$(cat $CartoDB_table_list_file)
   local downloadUrl=$CartoDB_downloadUrl
+  local account=""
+  local file_name=""
+  local table_name=""
 
 
   function  downloadTable()
@@ -26,11 +28,14 @@ function downloadTables ()
     curl -L -o "$destination/$file_name" "$newUrl"
   }
 
-  # mkdir -p $destination
-  for table_name in $tables; do
+  mkdir -p $destination
+  while read line; do
+    echo "line" $line
+    account=$(echo $line| perl -pe "s/^(.+?),\s{0,}(.+?)$/\1/g")
+    table_name=$(echo $line| perl -pe "s/^(.+?),\s{0,}(.+?)$/\2/g")
     file_name=$table_name"."$file_type
     downloadTable
-  done
+  done < "$CartoDB_table_list_file"
   echo "Completed"
 }
 downloadTables
