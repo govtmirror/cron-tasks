@@ -12,5 +12,9 @@ VALUES (
     "nps_render_log"
   ),
   {{taskName}},
-  NOW()::timestamp without time zone
-);
+  NOW()::timestamp without time zone,
+  null,
+  'Started'
+)
+RETURNING
+  "render_id", "run_time";

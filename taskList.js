@@ -35,7 +35,7 @@ module.exports = function(params) {
   }, {
     'description': 'Compile json files without images for Places Mobile',
     'comment': 'This runs much quicker than the version with images',
-    'enabled': true,
+    'enabled': false,
     'interval': '0 */25 * * * *', // Every 25 minutes
     'name': 'Places_Mobile_Without_Images',
     'task': {
@@ -45,7 +45,7 @@ module.exports = function(params) {
   }, {
     'description': 'Compile json files and images for Places Mobile',
     'comment': 'This requires going out to mapbox and checking off the the map thumbnails, so it takes longer',
-    'enabled': true,
+    'enabled': false,
     'interval': '0 45 */3 * * *', // Every 3 hours on the 45
     'name': 'Places_Mobile_Images',
     'task': {
@@ -65,7 +65,7 @@ module.exports = function(params) {
     'description': 'Syncs the places points with Mapbox (nps.places_poi)',
     'enabled': true,
     'interval': '0 15 * * * *', // Every 1 hour on the 15
-    'name': 'POI Tile Sync',
+    'name': 'POI Tile Sync POI',
     'task': {
       'type': 'script',
       'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_park_pois',
@@ -74,7 +74,7 @@ module.exports = function(params) {
     'description': 'Syncs all of the places data with Mapbox (nps.nps-places-data)',
     'enabled': true,
     'interval': '0 45 * * * *', // Every 1 hour on the 45
-    'name': 'POI Tile Sync',
+    'name': 'POI Tile Sync Data',
     'task': {
       'type': 'script',
       'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_places_data',

@@ -3,6 +3,7 @@ var runList = require('datawrap').runList,
     'name': 'CartoDB Tasks',
     'task': require('./src/runCartodb.js'),
     'params': [
+      // ['newPoint']
       ['point', 'polygon', 'line']
     ]
   }];
