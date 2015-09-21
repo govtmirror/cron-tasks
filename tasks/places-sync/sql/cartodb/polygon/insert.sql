@@ -5,6 +5,8 @@ INSERT INTO
     "name",
     "places_id",
     "tags",
+    "superclass",
+    "class",
     "type",
     "unit_code",
     "the_geom"
@@ -14,6 +16,8 @@ INSERT INTO
     '{{name}}',
     '{{places_id}}',
     '{{tags}}',
+    '{{superclass}}',
+    '{{class}}',
     '{{type}}',
     '{{unit_code}}',ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326)
   );
