@@ -5,6 +5,8 @@ INSERT INTO
     "name",
     "places_id",
     "tags",
+    "superclass",
+    "class",
     "type",
     "unit_code",
     "the_geom"
@@ -13,6 +15,8 @@ INSERT INTO
     '{{version}}',
     '{{name}}',
     '{{places_id}}',
+    '{{superclass}}',
+    '{{class}}',
     '{{tags}}',
     '{{type}}',
     '{{unit_code}}',
