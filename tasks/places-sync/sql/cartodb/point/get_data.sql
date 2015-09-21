@@ -4,6 +4,8 @@ SELECT
   "nps_cartodb_point_view"."version",
   "nps_cartodb_point_view"."name",
   "nps_cartodb_point_view"."places_id",
+  "nps_cartodb_point_view"."superclass",
+  "nps_cartodb_point_view"."class",
   "nps_cartodb_point_view"."tags",
   "nps_cartodb_point_view"."type",
   "nps_cartodb_point_view"."unit_code",
