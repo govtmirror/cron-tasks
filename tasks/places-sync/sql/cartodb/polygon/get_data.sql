@@ -4,6 +4,8 @@ SELECT
   "nps_cartodb_polygon_view"."version",
   "nps_cartodb_polygon_view"."name",
   "nps_cartodb_polygon_view"."places_id",
+  "nps_cartodb_polygon_view"."superclass",
+  "nps_cartodb_polygon_view"."class",
   "nps_cartodb_polygon_view"."tags",
   "nps_cartodb_polygon_view"."type",
   "nps_cartodb_polygon_view"."unit_code",
