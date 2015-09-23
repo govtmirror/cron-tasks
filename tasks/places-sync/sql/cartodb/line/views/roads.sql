@@ -4,7 +4,6 @@ WHERE "roads"."cartodb_id" NOT IN (
   FROM "places_lines" JOIN "roads" ON
     "roads"."cartodb_id" = "places_lines"."cartodb_id" AND
     "roads"."created_at" = "places_lines"."created_at"
-  WHERE "places_lines"."superclass" = 'road'
   );
 INSERT INTO
   "roads" (
