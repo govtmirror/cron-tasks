@@ -15,9 +15,9 @@ INSERT INTO
     '{{version}}',
     '{{name}}',
     '{{places_id}}',
+    '{{tags}}',
     '{{superclass}}',
     '{{class}}',
-    '{{tags}}',
     '{{type}}',
     '{{unit_code}}',
     ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326)
