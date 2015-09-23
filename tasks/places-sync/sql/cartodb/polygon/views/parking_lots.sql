@@ -41,5 +41,4 @@ WHERE
     FROM "places_polygons" JOIN "parking_lots" ON
       "parking_lots"."cartodb_id" = "places_polygons"."cartodb_id" AND
       "parking_lots"."created_at" = "places_polygons"."created_at"
-  ) AND
-  ("places_polygons"."tags"::json ->> 'amenity') = 'parking';
+  ) AND "places_polygons"."type" = 'Parking Lot';
