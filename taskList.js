@@ -63,7 +63,7 @@ module.exports = function(params) {
     }
   }, {
     'description': 'Syncs the places points with Mapbox (nps.places_poi)',
-    'enabled': true,
+    'enabled': false,
     'interval': '0 15 * * * *', // Every 1 hour on the 15
     'name': 'POI Tile Sync POI',
     'task': {
@@ -72,7 +72,7 @@ module.exports = function(params) {
     }
   }, {
     'description': 'Syncs all of the places data with Mapbox (nps.nps-places-data)',
-    'enabled': true,
+    'enabled': false,
     'interval': '0 45 * * * *', // Every 1 hour on the 45
     'name': 'POI Tile Sync Data',
     'task': {
