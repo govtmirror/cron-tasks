@@ -41,6 +41,5 @@ WHERE
     SELECT places_lines.cartodb_id
     FROM places_lines JOIN roads ON
       roads.cartodb_id = places_lines.cartodb_id AND
-      roads.created_at = places_lines.created_at AND
-      "places_lines"."superclass" = 'road'
-  );
+      roads.created_at = places_lines.created_at
+  ) AND "places_lines"."superclass" = 'road';
