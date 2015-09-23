@@ -8,8 +8,8 @@ INSERT INTO
     "superclass",
     "class",
     "type",
-    "unit_code",
     "rendered",
+    "unit_code",
     "the_geom"
   ) VALUES (
     '{{cartodb_id}}',
@@ -20,7 +20,7 @@ INSERT INTO
     '{{superclass}}',
     '{{class}}',
     '{{type}}',
-    '{{unit_code}}',
     '{{rendered}}',
+    '{{unit_code}}',
     ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326)
   );
