@@ -4,6 +4,7 @@ WHERE "buildings"."cartodb_id" NOT IN (
   FROM "places_polygons" JOIN "buildings" ON
     "buildings"."cartodb_id" = "places_polygons"."cartodb_id" AND
     "buildings"."created_at" = "places_polygons"."created_at"
+  WHERE "places_polygons"."superclass" != 'building'
   );
 INSERT INTO
   "buildings" (
@@ -41,5 +42,4 @@ WHERE
     FROM "places_polygons" JOIN "buildings" ON
       "buildings"."cartodb_id" = "places_polygons"."cartodb_id" AND
       "buildings"."created_at" = "places_polygons"."created_at"
-  ) AND
-  ("places_polygons"."tags"::json ->> 'building') IS NOT NULL;
+  ) AND "places_polygons"."superclass" = 'building';
