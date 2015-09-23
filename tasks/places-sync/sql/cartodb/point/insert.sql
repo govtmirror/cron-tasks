@@ -20,7 +20,7 @@ INSERT INTO
     '{{superclass}}',
     '{{class}}',
     '{{type}}',
-    '{{rendered}}',
+    '{{rendered}}'::text,
     '{{unit_code}}',
     ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326)
   );
