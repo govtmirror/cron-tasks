@@ -4,7 +4,6 @@ WHERE "buildings"."cartodb_id" NOT IN (
   FROM "places_polygons" JOIN "buildings" ON
     "buildings"."cartodb_id" = "places_polygons"."cartodb_id" AND
     "buildings"."created_at" = "places_polygons"."created_at"
-  WHERE "places_polygons"."superclass" != 'building'
   );
 INSERT INTO
   "buildings" (
