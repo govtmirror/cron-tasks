@@ -21,6 +21,7 @@ INSERT INTO
     "snowmobile",
     "superclass",
     "surface",
+    "tags",
     "type",
     "unit_code",
     "version",
@@ -62,7 +63,8 @@ SELECT
     ELSE false
   END AS "snowmobile",
   "superclass",
-  lower("places_lines"."tags"::json ->> 'surface') AS "surface"
+  lower("places_lines"."tags"::json ->> 'surface') AS "surface",
+  "tags",
   "type",
   "unit_code",
   "version",
