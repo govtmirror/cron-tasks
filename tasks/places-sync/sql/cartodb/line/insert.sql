@@ -1,26 +1,30 @@
 INSERT INTO
   "places_lines" (
     "cartodb_id",
-    "version",
-    "name",
-    "places_id",
-    "tags",
-    "superclass",
+    "the_geo",
     "class",
-    "type",
+    "name",
+    "places_created_at",
+    "places_id",
+    "places_updated_at",
     "rendered",
+    "superclass",
+    "tags",
+    "type",
     "unit_code",
-    "the_geom"
+    "version"
   ) VALUES (
     '{{cartodb_id}}',
-    '{{version}}',
-    '{{name}}',
-    '{{places_id}}',
-    '{{tags}}',
-    '{{superclass}}',
+    ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326),
     '{{class}}',
+    '{{name}}',
+    '{{places_created_at}}',
+    '{{places_id}}',
+    '{{places_updated_at}}',
+    '{{rendered}}',
+    '{{superclass}}',
+    '{{tags}}',
     '{{type}}',
-    '{{rendered}}'::text,
     '{{unit_code}}',
-    ST_SetSRID(ST_GeomFromGeoJSON('{{the_geom}}'),4326)
+    '{{version}}'
   );
