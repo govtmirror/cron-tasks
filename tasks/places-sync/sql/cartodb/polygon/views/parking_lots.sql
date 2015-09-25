@@ -13,7 +13,7 @@ INSERT INTO
     "name",
     "places_created_at",   
     "places_id",
-    "places_updated_at"
+    "places_updated_at",
     "superclass",
     "tags",
     "type",
