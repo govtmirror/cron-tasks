@@ -1,7 +1,7 @@
 -- Get all of the updates
 SELECT
   "nps_cartodb_polygon_view"."cartodb_id",
-  ST_AsGeoJSON(ST_Transform("nps_cartodb_polygon_view"."the_geom", 4326))::text AS "the_geom"
+  ST_AsGeoJSON(ST_Transform("nps_cartodb_polygon_view"."the_geom", 4326))::text AS "the_geom",
   "nps_cartodb_polygon_view"."class",
   "nps_cartodb_polygon_view"."name",
   "nps_cartodb_polygon_view"."places_created_at",
