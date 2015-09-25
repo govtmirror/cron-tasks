@@ -1,7 +1,7 @@
 INSERT INTO
   "places_polygons" (
     "cartodb_id",
-    "the_geo",
+    "the_geom",
     "class",
     "name",
     "places_created_at",
