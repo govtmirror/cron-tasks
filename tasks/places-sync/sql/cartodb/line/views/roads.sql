@@ -32,7 +32,7 @@ SELECT
   "places_id",
   "places_updated_at",
   "superclass",
-  'tags',
+  "tags",
   "type",
   "unit_code",
   "version",
