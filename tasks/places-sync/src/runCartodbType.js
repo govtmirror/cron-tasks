@@ -64,9 +64,9 @@ module.exports = function(type) {
                             viewList = [];
                           if (postSyncTasks) {
                             fs.readdirSync(__dirname + '/../sql/cartodb/' + type + '/views/').map(function(fileName) {
-                              console.log('********************************************************');
-                              console.log(fileName);
-                              console.log('********************************************************');
+                              //console.log('********************************************************');
+                              //console.log(fileName);
+                              //console.log('********************************************************');
                               viewList.push({
                                 'name': 'View: ' + fileName,
                                 'task': runScript.server,
