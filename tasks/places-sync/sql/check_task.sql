@@ -7,11 +7,13 @@ SELECT
     (
       SELECT MAX("render_id")
       FROM "nps_render_log" 
-      WHERE "status" ='Complete'
+      WHERE "status" ='Complete' AND "task_name" = {{taskName}}
     ),0
    )
    OR
      NOW() - max("run_time") > {{timeout}}
    AS "task_ready"
 FROM
-  nps_render_log;
+  nps_render_log
+WHERE
+  "task_name" = {{taskName}};
