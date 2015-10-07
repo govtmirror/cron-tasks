@@ -12,9 +12,33 @@ module.exports = function(type) {
     'npsTaskType': type
   };
 
-  return new datawrap.Bluebird(function(resolve, reject) {
+  return new datawrap.Bluebird(function(mainResolve, mainReject) {
+    var reject = function(e) {
+      if (params.renderId) {
+        runScript.database(sqlFiles.revertTask, params)
+          .then(function(){mainReject(e);})
+          .catch(function(newE){mainReject(newE);});
+      } else {
+        mainReject(e);
+      }
+    };
+    var resolve = function(message) {
+      if (params.renderId) {
+        runScript.database(sqlFiles.completeTask, params)
+          .then(function(){mainResolve(message);})
+          .catch(function(e){reject(e);});
+      } else {
+        reject('No renderId Found');
+      }
+    };
+    runScript.database(sqlFiles.checkTask, params)
+      .then(function(canRun) {
     runScript.database(sqlFiles.writeStartTime, params)
-      .then(function() {
+      .then(function(taskInfo) {
+        if (taskInfo[0] && taskInfo[0].rows[0]) {
+          params.renderId = taskInfo[0].rows[0].render_id;
+          params.runTime = taskInfo[0].rows[0].run_time;
+        }
         runScript.database(sqlFiles.cartodb.getChangeList, params)
           .then(function(result) {
             var resultIds;
@@ -109,6 +133,9 @@ module.exports = function(type) {
           }).catch(function(e) {
             reject(e);
           });
+      }).catch(function(e) {
+        reject(e);
+      });
       }).catch(function(e) {
         reject(e);
       });
