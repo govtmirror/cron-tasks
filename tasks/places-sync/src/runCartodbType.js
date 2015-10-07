@@ -139,7 +139,17 @@ module.exports = function (type) {
                         reject(e);
                       });
                   } else {
-                    resolve('No ' + type + ' updates!');
+                    if (params.renderId) {
+                      runScript.database(sqlFiles.revertTask, params)
+                      .then(function () {
+                        mainResolve('No ' + type + ' updates!');
+                      })
+                      .catch(function (newE) {
+                        mainReject(newE);
+                      });
+                    } else {
+                      mainResolve('No ' + type + ' updates!');
+                    }
                   }
                 }).catch(function (e) {
                   reject(e);
