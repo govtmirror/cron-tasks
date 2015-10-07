@@ -1,7 +1,6 @@
 var Handlebars = require('handlebars');
-module.exports = function(params) {
-
-  var handlebars = function(str) {
+module.exports = function (params) {
+  var handlebars = function (str) {
     return typeof str === 'string' ? Handlebars.compile(str)(params) : str;
   };
 
@@ -12,7 +11,7 @@ module.exports = function(params) {
     'name': 'Test DB task',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/test/db_test.sh'),
+      'path': handlebars('/bin/bash {{tasksDir}}/test/db_test.sh')
     }
   }, {
     'description': 'Nightly backup of the Places database',
@@ -21,7 +20,7 @@ module.exports = function(params) {
     'name': 'Places_SQL_Dump',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/sql_dump.sh'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/sql_dump.sh')
     }
   }, {
     'description': 'Updates the GeoJSON file on github',
@@ -30,7 +29,7 @@ module.exports = function(params) {
     'name': 'Places_POI_update',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/update_geojson.sh'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-backup/update_geojson.sh')
     }
   }, {
     'description': 'Compile json files without images for Places Mobile',
@@ -40,7 +39,7 @@ module.exports = function(params) {
     'name': 'Places_Mobile_Without_Images',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh 0'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh 0')
     }
   }, {
     'description': 'Compile json files and images for Places Mobile',
@@ -50,16 +49,16 @@ module.exports = function(params) {
     'name': 'Places_Mobile_Images',
     'task': {
       'type': 'script',
-      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh map_thumbnail'),
+      'path': handlebars('/bin/bash {{tasksDir}}/places-mobile/compile_locations.sh map_thumbnail')
     }
   }, {
     'description': 'Syncs the places points, polygons, and lines with CartoDB',
     'enabled': true,
-    'interval': '0 */5 * * * *', // Every 5 minutes
+    'interval': '*/30 * * * * *', // Every 30 seconds
     'name': 'CartoDB_Render',
     'task': {
       'type': 'script',
-      'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js'),
+      'path': handlebars('/usr/bin/node /home/npmap/dev/cron-tasks/tasks/places-sync/index.js')
     }
   }, {
     'description': 'Syncs the places points with Mapbox (nps.places_poi)',
@@ -68,7 +67,7 @@ module.exports = function(params) {
     'name': 'POI Tile Sync POI',
     'task': {
       'type': 'script',
-      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_park_pois',
+      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_park_pois'
     }
   }, {
     'description': 'Syncs all of the places data with Mapbox (nps.nps-places-data)',
@@ -77,7 +76,7 @@ module.exports = function(params) {
     'name': 'POI Tile Sync Data',
     'task': {
       'type': 'script',
-      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_places_data',
+      'path': '/bin/bash /home/npmap/dev/cron-tasks/tasks/mbtiles-sync/run-mbstudio.sh nps_places_data'
     }
   }];
 };
