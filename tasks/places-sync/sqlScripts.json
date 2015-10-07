@@ -1,4 +1,7 @@
 {
+  "checkTask":"check_task.sql",
+  "completeTask":"complete_task.sql",
+  "revertTask":"revert_task.sql",
   "writeStartTime": "write_to_render_log.sql",
   "cartodb": {
     "insert": "/cartodb/{{npsTaskType}}/insert.sql",
