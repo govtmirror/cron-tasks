@@ -122,6 +122,7 @@ module.exports = function (type) {
                                 if (viewList.length > 0) {
                                   datawrap.runList(viewList, 'runCartodbType Views')
                                     .then(function () {
+                                      params.updateCount = viewList.length || 0;
                                       resolve('Done with ' + type + 's and its ' + viewList.length + ' materialized view' + (viewList.length > 1 ? 's!' : '!'));
                                     }).catch(function (e) {
                                       reject(e);
