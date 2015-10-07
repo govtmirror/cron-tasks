@@ -4,6 +4,7 @@ UPDATE
   "nps_render_log"
 SET
   "status" = 'Complete',
+  "changes" = {{updateCount}},
   "end_time" = NOW()
 WHERE
   "render_id" = {{renderId}};
