@@ -43,8 +43,6 @@ module.exports = function (type) {
     };
     runScript.database(sqlFiles.checkTask, params)
       .then(function (canRun) {
-        console.log('****', canRun[0].rows[0], '****');
-        process.exit(0);
         if (canRun && canRun[0] && canRun[0].rows[0] && canRun[0].rows[0].task_ready) {
           runScript.database(sqlFiles.writeStartTime, params)
             .then(function (taskInfo) {
