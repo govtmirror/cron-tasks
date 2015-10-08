@@ -29,8 +29,9 @@ module.exports = function (type) {
       }
     };
     var resolve = function (message) {
+      params.updateCount = params.updateCount || 0;
       if (params.renderId) {
-        runScript.database(sqlFiles.completeTask, params)
+        runScript.database(params.updateCount > 0 ? sqlFiles.completeTask : sqlFiles.revertTask, params)
           .then(function () {
             mainResolve(message);
           })
@@ -119,10 +120,10 @@ module.exports = function (type) {
                                   linkUrl += '&format=geojson';
                                   slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <http://www.nps.gov/maps/full.html?mapId=daafb8e5-280a-4914-b3f5-7d160a453f9a&url=' + btoa(linkUrl) + '|View GeoJSON>');
                                 }
+                                params.updateCount = insertList.length || 0;
                                 if (viewList.length > 0) {
                                   datawrap.runList(viewList, 'runCartodbType Views')
                                     .then(function () {
-                                      params.updateCount = viewList.length || 0;
                                       resolve('Done with ' + type + 's and its ' + viewList.length + ' materialized view' + (viewList.length > 1 ? 's!' : '!'));
                                     }).catch(function (e) {
                                       reject(e);
@@ -140,17 +141,7 @@ module.exports = function (type) {
                         reject(e);
                       });
                   } else {
-                    if (params.renderId) {
-                      runScript.database(sqlFiles.revertTask, params)
-                      .then(function () {
-                        mainResolve('No ' + type + ' updates!');
-                      })
-                      .catch(function (newE) {
-                        mainReject(newE);
-                      });
-                    } else {
-                      mainResolve('No ' + type + ' updates!');
-                    }
+                     resolve('No ' + type + ' updates!');
                   }
                 }).catch(function (e) {
                   reject(e);
