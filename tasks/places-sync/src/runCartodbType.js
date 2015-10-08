@@ -7,6 +7,11 @@ var Slack = require('node-slack-web-api');
 var slack = new Slack(config.slack);
 var sqlFiles = require('../sqlScripts');
 
+var postgresTime = function (time) {
+  // 1999-01-08 04:05:06
+  return time.getUTCFullYear() + '-' + ('0' + (time.getUTCMonth()+1)).slice(-2) + '-' + ('0' + time.getUTCDate()).slice(-2) + ' ' + ('0' + time.getUTCHours()).slice(-2) + ':' + ('0' + time.getUTCMinutes()).slice(-2) + ':' + ('0' + time.getUTCSeconds()).slice(-2);
+};
+
 module.exports = function (type) {
   var params = {
     'taskName': type + '_' + config.taskName,
@@ -110,13 +115,14 @@ module.exports = function (type) {
                                     });
                                   });
                                 }
+                                // We add 30 seconds to the end time to allow time for the CartoDB triggers
                                 if (insertList.length > 0) {
                                   var linkUrl = 'https://' + config.database.cartodb.account;
                                   linkUrl += '.cartodb.com/api/v2/sql?q=SELECT%20*%20FROM%20';
                                   linkUrl += type === 'point' ? 'points_of_interest' : type === 'line' ? 'places_lines' : 'places_polygons';
-                                  linkUrl += '%20where%20cartodb_id%20=%20ANY%20(';
-                                  linkUrl += params.cartoDbChanges;
-                                  linkUrl += ');&api_key=' + config.database.cartodb.apiKey;
+                                  linkUrl += '%20WHERE%20updated_at%20>=%20\'' + postgresTime(params.runTime) + '\'';
+                                  linkUrl += '%20AND%20updated_at%20<=%20\'' + postgresTime(new Date(new Date().getTime() + (30 * 1000))) + '\'';
+                                  linkUrl += ';&api_key=' + config.database.cartodb.apiKey;
                                   linkUrl += '&format=geojson';
                                   slack('Places: Updated ' + insertList.length + ' ' + type + (insertList.length > 1 ? 's' : '') + ' in CartoDB <http://www.nps.gov/maps/full.html?mapId=daafb8e5-280a-4914-b3f5-7d160a453f9a&url=' + btoa(linkUrl) + '|View GeoJSON>');
                                 }
