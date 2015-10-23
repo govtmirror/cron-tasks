@@ -1,3 +1,4 @@
+nps, places_mobile_activities
 nps, places_mobile_events
 nps, places_mobile_more_pages
 nps, places_mobile_more
