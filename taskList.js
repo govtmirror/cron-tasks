@@ -23,6 +23,15 @@ module.exports = function (params) {
       'path': handlebars('/bin/bash {{tasksDir}}/places-backup/sql_dump.sh')
     }
   }, {
+    'description': 'Nightly backup of the CartoDB Tables',
+    'enabled': true,
+    'interval': '0 05 1 * * *', // 1:05 am
+    'name': 'CartoDB_Backup_Dump',
+    'task': {
+      'type': 'script',
+      'path': handlebars('/bin/bash {{tasksDir}}/cartodb-backup/download.sh')
+    }
+  }, {
     'description': 'Updates the GeoJSON file on github',
     'enabled': false,
     'interval': '0 20 * * * *', // On the 20 of every hour
