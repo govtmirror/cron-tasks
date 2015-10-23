@@ -4,7 +4,7 @@
 function downloadTables ()
 {
   source "./settings.sh"
-  local destination=$CartoDB_destination
+  local destination=$CartoDB_destination"_"$(date +'%Y%m%d')
   local file_type=$CartoDB_file_type
   # local tables=$(cat $CartoDB_table_list_file)
   local downloadUrl=$CartoDB_downloadUrl
@@ -37,6 +37,7 @@ function downloadTables ()
     file_name=$table_name"."$file_type
     downloadTable
   done < "$CartoDB_table_list_file"
+  zip -r $destination".zip" $destination && rm -r $destination
   echo "Completed"
 }
 downloadTables
