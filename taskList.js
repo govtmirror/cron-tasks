@@ -25,7 +25,7 @@ module.exports = function (params) {
   }, {
     'description': 'Nightly backup of the CartoDB Tables',
     'enabled': true,
-    'interval': '0 05 1 * * *', // 1:05 am
+    'interval': '0 05 2 * * *', // 2:05 am
     'name': 'CartoDB_Backup_Dump',
     'task': {
       'type': 'script',
