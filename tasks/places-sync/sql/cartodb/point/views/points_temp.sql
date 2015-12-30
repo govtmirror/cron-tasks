@@ -142,6 +142,5 @@ WHERE
   "base"."cartodb_id" NOT IN (
     SELECT points_of_interest.cartodb_id
     FROM points_of_interest JOIN points_temp ON
-      points_temp.cartodb_id = points_of_interest.cartodb_id AND
-      points_temp.created_at = points_of_interest.created_at
+      points_temp.cartodb_id = points_of_interest.cartodb_id
   );
