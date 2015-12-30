@@ -142,6 +142,5 @@ WHERE
   "base"."cartodb_id" NOT IN (
     SELECT places_polygons.cartodb_id
     FROM places_polygons JOIN buildings_temp ON
-      buildings_temp.cartodb_id = places_polygons.cartodb_id AND
-      buildings_temp.created_at = places_polygons.created_at
+      buildings_temp.cartodb_id = places_polygons.cartodb_id
   ) AND "base"."superclass" = 'building';
