@@ -142,6 +142,5 @@ WHERE
   "base"."cartodb_id" NOT IN (
     SELECT places_polygons.cartodb_id
     FROM places_polygons JOIN parking_lots_temp ON
-      parking_lots_temp.cartodb_id = places_polygons.cartodb_id AND
-      parking_lots_temp.created_at = places_polygons.created_at
+      parking_lots_temp.cartodb_id = places_polygons.cartodb_id
   ) AND "base"."type" = 'Parking Lot';
