@@ -142,6 +142,5 @@ WHERE
   "base"."cartodb_id" NOT IN (
     SELECT places_lines.cartodb_id
     FROM places_lines JOIN trails_temp ON
-      trails_temp.cartodb_id = places_lines.cartodb_id AND
-      trails_temp.created_at = places_lines.created_at
+      trails_temp.cartodb_id = places_lines.cartodb_id
   ) AND "base"."superclass" = 'trail';
