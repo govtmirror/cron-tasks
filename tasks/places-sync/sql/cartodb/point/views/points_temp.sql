@@ -27,6 +27,7 @@ INSERT INTO
     "capacity",
     "cartodb_id",
     "class",
+    "created_at",
     "description",
     "fee",
     "gender",
@@ -78,6 +79,7 @@ SELECT
   ("base"."tags"::json)->>'capacity'         AS "capacity",
   "base"."cartodb_id"                        AS "cartodb_id",
   "base"."class"                             AS "class",
+  "base"."created_at"                        AS "created_at",
   ("base"."tags"::json)->>'description'      AS "description",
   ("base"."tags"::json)->>'fee'              AS "fee",
   CASE
@@ -140,7 +142,6 @@ FROM
   points_of_interest "base"
 WHERE
   "base"."cartodb_id" NOT IN (
-    SELECT points_of_interest.cartodb_id
-    FROM points_of_interest JOIN points_temp ON
-      points_temp.cartodb_id = points_of_interest.cartodb_id
+    SELECT points_temp.cartodb_id
+    FROM points_temp
   );
