@@ -27,6 +27,7 @@ INSERT INTO
     "capacity",
     "cartodb_id",
     "class",
+    "created_at",
     "description",
     "fee",
     "gender",
@@ -78,6 +79,7 @@ SELECT
   ("base"."tags"::json)->>'capacity'         AS "capacity",
   "base"."cartodb_id"                        AS "cartodb_id",
   "base"."class"                             AS "class",
+  "base"."created_at"                        AS "created_at",
   ("base"."tags"::json)->>'description'      AS "description",
   ("base"."tags"::json)->>'fee'              AS "fee",
   CASE
@@ -140,7 +142,6 @@ FROM
   places_polygons "base"
 WHERE
   "base"."cartodb_id" NOT IN (
-    SELECT places_polygons.cartodb_id
-    FROM places_polygons JOIN parking_lots_temp ON
-      parking_lots_temp.cartodb_id = places_polygons.cartodb_id
+    SELECT parking_lots_temp.cartodb_id
+    FROM parking_lots_temp
   ) AND "base"."type" = 'Parking Lot';
