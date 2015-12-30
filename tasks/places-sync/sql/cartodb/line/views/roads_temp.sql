@@ -142,6 +142,5 @@ WHERE
   "base"."cartodb_id" NOT IN (
     SELECT places_lines.cartodb_id
     FROM places_lines JOIN roads_temp ON
-      roads_temp.cartodb_id = places_lines.cartodb_id AND
-      roads_temp.created_at = places_lines.created_at
+      roads_temp.cartodb_id = places_lines.cartodb_id
   ) AND "base"."superclass" = 'road';
