@@ -27,6 +27,7 @@ INSERT INTO
     "capacity",
     "cartodb_id",
     "class",
+    "created_at",
     "description",
     "fee",
     "gender",
@@ -78,6 +79,7 @@ SELECT
   ("base"."tags"::json)->>'capacity'         AS "capacity",
   "base"."cartodb_id"                        AS "cartodb_id",
   "base"."class"                             AS "class",
+  "base"."created_at"                        AS "created_at",
   ("base"."tags"::json)->>'description'      AS "description",
   ("base"."tags"::json)->>'fee'              AS "fee",
   CASE
@@ -140,7 +142,6 @@ FROM
   places_lines "base"
 WHERE
   "base"."cartodb_id" NOT IN (
-    SELECT places_lines.cartodb_id
-    FROM places_lines JOIN trails_temp ON
-      trails_temp.cartodb_id = places_lines.cartodb_id
+    SELECT trails_temp.cartodb_id
+    FROM trails_temp
   ) AND "base"."superclass" = 'trail';
