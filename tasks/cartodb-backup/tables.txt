@@ -14,6 +14,10 @@ nps, places_mobile_more_searches
 nps, places_mobile_tours_sites
 nps, places_mobile_tours
 nps, places_mobile_sites
+nps-hfc, maps
+nps-hfc, maps_dev
+nps-hfc, parks
+nps-hfc, parks_dev
 nps-yell, destinations
 nps-yell, road_statuses_dev
 nps-yell, road_incidents_dev
