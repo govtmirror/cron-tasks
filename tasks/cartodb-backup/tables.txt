@@ -14,6 +14,8 @@ nps, places_mobile_more_searches
 nps, places_mobile_tours_sites
 nps, places_mobile_tours
 nps, places_mobile_sites
+nps, places_sync_tasks
+nps, places_sync_sources
 nps-yell, destinations
 nps-yell, road_statuses_dev
 nps-yell, road_incidents_dev
