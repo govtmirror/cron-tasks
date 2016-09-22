@@ -34,7 +34,7 @@ function downloadTables ()
     account=$(echo $line | perl -pe "s/^(.+?),\s{0,}(.+?)$/\1/g")
     table_name=$(echo $line | perl -pe "s/^(.+?),\s{0,}(.+?)$/\2/g")
     api_key=$(grep -r "^$account," "$CartoDB_api_key_file" | perl -pe "s/^(.+?),\s{0,}(.+?)$/\2/g")
-    file_name=$table_name"."$file_type
+    file_name="$account".$table_name"."$file_type
     downloadTable
   done < "$CartoDB_table_list_file"
   zip -r $destination".zip" $destination && rm -r $destination
