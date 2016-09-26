@@ -17,6 +17,7 @@ FROM
         WHERE "render_id" = (SELECT max("render_id")
           FROM "nps_render_log"
           WHERE "task_name" = {{taskName}})
+	  LIMIT 1
        ),
        NOW()::timestamp without time zone
      ) AS "end_time",
@@ -27,6 +28,7 @@ FROM
         FROM "nps_render_log"
         WHERE "task_name" = {{taskName}}
           AND "nps_render_log"."render_id" < (SELECT max(b."render_id") FROM "nps_render_log" b  WHERE "task_name" = {{taskName}}))
+      LIMIT 1
       ),
       '2010-01-01'::timestamp without time zone
     ) as "start_time") "render_time"
@@ -45,6 +47,7 @@ FROM
         WHERE "render_id" = (SELECT max("render_id")
           FROM "nps_render_log"
           WHERE "task_name" = {{taskName}})
+	  LIMIT 1
        ),
        NOW()::timestamp without time zone
      ) AS "end_time",
@@ -55,6 +58,7 @@ FROM
         FROM "nps_render_log"
         WHERE "task_name" = {{taskName}}
           AND "nps_render_log"."render_id" < (SELECT max(b."render_id") FROM "nps_render_log" b WHERE "task_name" = {{taskName}}))
+      LIMIT 1
       ),
       '2010-01-01'::timestamp without time zone
     ) as "start_time") "render_time"
