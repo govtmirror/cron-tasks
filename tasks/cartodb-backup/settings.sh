@@ -1,7 +1,7 @@
 #!/bin/bash
 CartoDB_file_type="csv"
-CartoDB_api_key_file="./secrets/cartodb_api_key.txt"
-CartoDB_table_list_file="./tables.txt"
+CartoDB_api_key_file="/secrets/cartodb_api_key.txt"
+CartoDB_table_list_file="/tables.txt"
 CartoDB_destination="/mnt/backups/cartodb"
 
 # everything in {{ }} brackets MUST have an associated variable in the download.sh
