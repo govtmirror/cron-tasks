@@ -1,5 +1,5 @@
 var Databases = require('places-sync-databases');
-var config = require('config');
+var config = require('./config');
 var db = new Databases({
   'type': 'postgresql',
   'connection': config.connection
