@@ -1,0 +1,20 @@
+{
+  "name": "places-cleanup",
+  "version": "0.0.1",
+  "description": "A simple node.js program that runs some SQL code on the server to clean up the database",
+  "keywords": ["postgres"],
+  "author": "Jim McAndrew <jim_mcandrew@partner.nps.gov>",
+  "license": "Public Domain",
+  "contributors": [{
+    "name": "Jim McAndrew",
+    "email": "jim_mcandrew@partner.nps.gov"
+  }
+  ],
+  "scripts": {
+    "start": "node index"
+  },
+  "dependencies": {
+    "places-sync-databases": "git+http://github.com/nationalparkservice/places-sync-databases.git"
+  },
+  "engine": "node 0.10.35"
+}
