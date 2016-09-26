@@ -1,3 +1,6 @@
+// Work around for https
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 var runList = require('datawrap').runList,
   taskList = [{
     'name': 'CartoDB Tasks',
