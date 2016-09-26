@@ -49,5 +49,14 @@ module.exports = function (params) {
       'type': 'script',
       'path': handlebars('/usr/bin/node {{tasksDir}}/places-sync/index.js')
     }
+  }, {
+    'description': 'Nightly Cleanup of the places tables',
+    'enabled': true,
+    'interval': '0 10 0 * * *', // 12:10 am
+    'name': 'Nightly Cleanup',
+    'task': {
+      'type': 'script',
+      'path': handlebars('/usr/bin/node {{tasksDir}}/places-cleanup/index.js')
+    }
   }];
 };
